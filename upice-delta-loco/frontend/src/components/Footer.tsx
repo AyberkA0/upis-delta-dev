@@ -111,7 +111,7 @@ export default function Footer() {
           alignItems: 'center', flexWrap: 'wrap', gap: 12,
         }}>
           <span style={{ fontSize: 12, color: '#7A6B72', fontFamily: "'DM Mono', monospace" }}>
-            © 2026 UPIS Fintech. {t('footer.rights')}
+            © 2026 Upis Fintech. {t('footer.rights')}
           </span>
           <div style={{ display: 'flex', gap: 20 }}>
             {['GitHub', 'Discord'].map(s => (
