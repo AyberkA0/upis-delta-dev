@@ -1,0 +1,103 @@
+# --- General and OS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- IDE and Editors ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.bak
+*.tmp
+*.temp
+
+# --- Rust/Cargo ---
+/target/
+target/
+debug/
+**/target/
+**/debug/
+**/*.rs.bk
+Cargo.lock
+.rustfmt.toml
+.cargo/
+*.pdb
+
+# --- Migration ---
+/migration/target/
+/migration/debug/
+/migration/Cargo.lock
+
+# --- Build and Cache ---
+/build/
+**/build/
+.cache/
+*.cache
+/dist/
+**/dist/
+dist-ssr/
+incremental/
+*.pid
+*.seed
+*.pid.lock
+
+# --- Node/Frontend ---
+/frontend/node_modules/
+/frontend/dist/
+/frontend/dist-ssr/
+/frontend/.next/
+/frontend/.turbo/
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+/frontend/.cache/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- Environment and Config Files ---
+.env
+.env.*
+!.env.example
+**/config/local.yaml
+**/config/*.local.yaml
+**/config/production.yaml
+
+# --- Logs ---
+*.log
+logs/
+**/*.log
+
+# --- Test and Snapshots ---
+/coverage/
+**/coverage/
+*.lcov
+/tests/**/snapshots/
+**/__snapshots__/
+**/*.snap
+
+# --- SQLite and Other DB ---
+*.sqlite
+*.sqlite-*
+
+# --- Assets (local, binary, cache) ---
+*.bin
+*.svg
+*.lock
+
+# --- Other ---
+/*.code-workspace
+*.seed
+*.pid
+*.pid.lock

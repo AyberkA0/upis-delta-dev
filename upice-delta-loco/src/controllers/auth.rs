@@ -40,8 +40,6 @@ pub struct ResendVerificationParams {
     pub email: String,
 }
 
-/// Register function creates a new user with the given parameters and sends a
-/// welcome email to the user
 #[debug_handler]
 async fn register(
     State(ctx): State<AppContext>,
@@ -55,7 +53,7 @@ async fn register(
             tracing::info!(
                 message = err.to_string(),
                 user_email = &params.email,
-                "could not register user",
+                "registration failed for user",
             );
             return format::json(());
         }
@@ -71,29 +69,89 @@ async fn register(
     format::json(())
 }
 
-/// Verify register user. if the user not verified his email, he can't login to
-/// the system.
 #[debug_handler]
 async fn verify(State(ctx): State<AppContext>, Path(token): Path<String>) -> Result<Response> {
     let Ok(user) = users::Model::find_by_verification_token(&ctx.db, &token).await else {
-        return unauthorized("invalid token");
+        return Ok(axum::response::Html(r#"
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>Geçersiz Token</title>
+                <style>
+                    body { font-family: monospace; background: #0a0c0f; color: #e8edf5; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+                    .box { text-align: center; padding: 48px; border: 1px solid #1e2530; border-radius: 8px; background: #111418; }
+                    h1 { color: #ff4757; font-size: 24px; margin-bottom: 12px; }
+                    p { color: #5a6a7e; margin-bottom: 24px; }
+                    a { color: #00d4a8; text-decoration: none; }
+                </style>
+            </head>
+            <body>
+                <div class="box">
+                    <h1>Geçersiz Token</h1>
+                    <p>Bu doğrulama linki geçersiz veya süresi dolmuş.</p>
+                    <a href="http://localhost:3000/login">Giriş sayfasına dön</a>
+                </div>
+            </body>
+            </html>
+        "#).into_response());
     };
 
     if user.email_verified_at.is_some() {
-        tracing::info!(pid = user.pid.to_string(), "user already verified");
-    } else {
-        let active_model = user.into_active_model();
-        let user = active_model.verified(&ctx.db).await?;
-        tracing::info!(pid = user.pid.to_string(), "user verified");
+        return Ok(axum::response::Html(r#"
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>Zaten Doğrulandı</title>
+                <style>
+                    body { font-family: monospace; background: #0a0c0f; color: #e8edf5; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+                    .box { text-align: center; padding: 48px; border: 1px solid #1e2530; border-radius: 8px; background: #111418; }
+                    h1 { color: #00d4a8; font-size: 24px; margin-bottom: 12px; }
+                    p { color: #5a6a7e; margin-bottom: 24px; }
+                    a { color: #00d4a8; text-decoration: none; }
+                </style>
+            </head>
+            <body>
+                <div class="box">
+                    <h1>Zaten Doğrulandı</h1>
+                    <p>Bu hesap zaten doğrulanmış.</p>
+                    <a href="http://localhost:3000/login">Giriş yap</a>
+                </div>
+            </body>
+            </html>
+        "#).into_response());
     }
 
-    format::json(())
+    let active_model = user.into_active_model();
+    let user = active_model.verified(&ctx.db).await?;
+    tracing::info!(pid = user.pid.to_string(), "user verified");
+
+    Ok(axum::response::Html(r#"
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Email Doğrulandı</title>
+            <style>
+                body { font-family: monospace; background: #0a0c0f; color: #e8edf5; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+                .box { text-align: center; padding: 48px; border: 1px solid #1e2530; border-radius: 8px; background: #111418; max-width: 400px; }
+                h1 { color: #00d4a8; font-size: 24px; margin-bottom: 12px; }
+                p { color: #5a6a7e; margin-bottom: 24px; }
+                a { display: inline-block; padding: 10px 24px; background: #00d4a8; color: #000; text-decoration: none; border-radius: 4px; font-weight: 700; }
+            </style>
+        </head>
+        <body>
+            <div class="box">
+                <h1>✓ Email Doğrulandı</h1>
+                <p>Hesabınız başarıyla doğrulandı. Şimdi giriş yapabilirsiniz.</p>
+                <a href="http://localhost:3000/login">Giriş Yap</a>
+            </div>
+        </body>
+        </html>
+    "#).into_response())
 }
 
-/// In case the user forgot his password  this endpoints generate a forgot token
-/// and send email to the user. In case the email not found in our DB, we are
-/// returning a valid request for for security reasons (not exposing users DB
-/// list).
 #[debug_handler]
 async fn forgot(
     State(ctx): State<AppContext>,
@@ -115,7 +173,6 @@ async fn forgot(
     format::json(())
 }
 
-/// reset user password by the given parameters
 #[debug_handler]
 async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -> Result<Response> {
     let Ok(user) = users::Model::find_by_reset_token(&ctx.db, &params.token).await else {
@@ -132,7 +189,6 @@ async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -
     format::json(())
 }
 
-/// Creates a user login and returns a token
 #[debug_handler]
 async fn login(State(ctx): State<AppContext>, Json(params): Json<LoginParams>) -> Result<Response> {
     let Ok(user) = users::Model::find_by_email(&ctx.db, &params.email).await else {
@@ -164,20 +220,6 @@ async fn current(auth: auth::JWT, State(ctx): State<AppContext>) -> Result<Respo
     format::json(CurrentResponse::new(&user))
 }
 
-/// Magic link authentication provides a secure and passwordless way to log in to the application.
-///
-/// # Flow
-/// 1. **Request a Magic Link**:
-///    A registered user sends a POST request to `/magic-link` with their email.
-///    If the email exists, a short-lived, one-time-use token is generated and sent to the user's email.
-///    For security and to avoid exposing whether an email exists, the response always returns 200, even if the email is invalid.
-///
-/// 2. **Click the Magic Link**:
-///    The user clicks the link (/magic-link/{token}), which validates the token and its expiration.
-///    If valid, the server generates a JWT and responds with a [`LoginResponse`].
-///    If invalid or expired, an unauthorized response is returned.
-///
-/// This flow enhances security by avoiding traditional passwords and providing a seamless login experience.
 async fn magic_link(
     State(ctx): State<AppContext>,
     Json(params): Json<MagicLinkParams>,
@@ -192,8 +234,6 @@ async fn magic_link(
     }
 
     let Ok(user) = users::Model::find_by_email(&ctx.db, &params.email).await else {
-        // we don't want to expose our users email. if the email is invalid we still
-        // returning success to the caller
         tracing::debug!(email = params.email, "user not found by email");
         return format::empty_json();
     };
@@ -204,14 +244,11 @@ async fn magic_link(
     format::empty_json()
 }
 
-/// Verifies a magic link token and authenticates the user.
 async fn magic_link_verify(
     Path(token): Path<String>,
     State(ctx): State<AppContext>,
 ) -> Result<Response> {
     let Ok(user) = users::Model::find_by_magic_token(&ctx.db, &token).await else {
-        // we don't want to expose our users email. if the email is invalid we still
-        // returning success to the caller
         return unauthorized("unauthorized!");
     };
 

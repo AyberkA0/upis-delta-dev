@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "markets": "Markets",
+    "data": "Data",
+    "conditions": "Conditions",
+    "community": "Community",
+    "sign_in": "Sign In",
+    "account": "Account",
+    "signed_in_as": "Signed in as",
+    "dashboard": "Dashboard",
+    "strategies": "Strategies",
+    "settings": "Settings",
+    "api_keys": "API Keys",
+    "sign_out": "Sign Out"
+  },
+  "hero": {
+    "badge": "Data · AI · Execution",
+    "title_1": "Monitor markets.",
+    "title_2": "Define conditions.",
+    "title_3": "Automate orders.",
+    "subtitle": "Track price and news data, describe your conditions to AI, and let the system automatically send trade orders when conditions are met.",
+    "cta_primary": "Get Started Free",
+    "cta_secondary": "Sign In",
+    "cta_dashboard": "Go to Dashboard →",
+    "scroll": "SCROLL"
+  },
+  "markets": {
+    "title": "Live Markets",
+    "subtitle": "Real-time Price Feed",
+    "live": "LIVE"
+  },
+  "how": {
+    "badge": "How It Works",
+    "title": "Automated trading in three steps",
+    "step1_title": "Monitor Data",
+    "step1_desc": "Track BTC, equities, indices and news feeds in real time.",
+    "step2_title": "Define Conditions",
+    "step2_desc": "Tell the AI your conditions in plain language. No coding required.",
+    "step3_title": "Execute Orders",
+    "step3_desc": "When conditions are met, the system automatically sends trade orders to your connected broker."
+  },
+  "footer": {
+    "tagline": "Data-driven, AI-powered automated trading platform.",
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "language": "Language",
+    "rights": "All rights reserved.",
+    "markets": "Markets",
+    "data_feeds": "Data Feeds",
+    "conditions": "Condition Engine",
+    "api": "API",
+    "about": "About",
+    "blog": "Blog",
+    "careers": "Careers",
+    "press": "Press",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies",
+    "security": "Security"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "subtitle": "Sign in to your account",
+      "email": "Email",
+      "password": "Password",
+      "button": "Sign In",
+      "loading": "Signing in...",
+      "no_account": "Don't have an account?",
+      "register_link": "Register",
+      "error": "Login failed"
+    },
+    "register": {
+      "title": "Register",
+      "subtitle": "Create a new account",
+      "name": "Full Name",
+      "email": "Email",
+      "password": "Password (min 8 characters)",
+      "button": "Register",
+      "loading": "Registering...",
+      "has_account": "Already have an account?",
+      "login_link": "Sign In",
+      "error": "Registration failed",
+      "success_title": "Email Sent",
+      "success_desc": "A verification link was sent to",
+      "go_login": "Go to Login"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome",
+    "logout": "Logout"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back"
+  }
+}

@@ -6,6 +6,10 @@ use serde_json::json;
 
 use crate::models::users;
 
+fn mailer_from() -> String {
+    std::env::var("MAILER_FROM").unwrap_or_else(|_| "onboarding@resend.dev".to_string())
+}
+
 static welcome: Dir<'_> = include_dir!("src/mailers/auth/welcome");
 static forgot: Dir<'_> = include_dir!("src/mailers/auth/forgot");
 static magic_link: Dir<'_> = include_dir!("src/mailers/auth/magic_link");
@@ -14,16 +18,12 @@ static magic_link: Dir<'_> = include_dir!("src/mailers/auth/magic_link");
 pub struct AuthMailer {}
 impl Mailer for AuthMailer {}
 impl AuthMailer {
-    /// Sending welcome email the the given user
-    ///
-    /// # Errors
-    ///
-    /// When email sending is failed
     pub async fn send_welcome(ctx: &AppContext, user: &users::Model) -> Result<()> {
         Self::mail_template(
             ctx,
             &welcome,
             mailer::Args {
+                from: Some(mailer_from()),
                 to: user.email.to_string(),
                 locals: json!({
                   "name": user.name,
@@ -38,16 +38,12 @@ impl AuthMailer {
         Ok(())
     }
 
-    /// Sending forgot password email
-    ///
-    /// # Errors
-    ///
-    /// When email sending is failed
     pub async fn forgot_password(ctx: &AppContext, user: &users::Model) -> Result<()> {
         Self::mail_template(
             ctx,
             &forgot,
             mailer::Args {
+                from: Some(mailer_from()),
                 to: user.email.to_string(),
                 locals: json!({
                   "name": user.name,
@@ -62,11 +58,6 @@ impl AuthMailer {
         Ok(())
     }
 
-    /// Sends a magic link authentication email to the user.
-    ///
-    /// # Errors
-    ///
-    /// When email sending is failed
     pub async fn send_magic_link(ctx: &AppContext, user: &users::Model) -> Result<()> {
         Self::mail_template(
             ctx,

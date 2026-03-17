@@ -6,12 +6,12 @@ export default defineConfig({
   plugins: [pluginReact()],
   html: {
     favicon: "src/assets/favicon.ico",
-    title: "Loco SaaS Starter",
+    title: "Delta | upisdelta.com ",
   },
   server: {
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:5150",
+        target: "http://127.0.0.1:5120",
         changeOrigin: true,
         secure: false,
       },

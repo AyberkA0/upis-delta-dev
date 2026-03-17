@@ -1,4 +1,6 @@
 use async_trait::async_trait;
+use tower_http::cors::{CorsLayer, Any};
+use axum::http::Method;
 use loco_rs::{
     app::{AppContext, Hooks, Initializer},
     bgworker::{BackgroundWorker, Queue},
@@ -38,7 +40,15 @@ impl Hooks for App {
         environment: &Environment,
         config: Config,
     ) -> Result<BootResult> {
-        create_app::<Self, Migrator>(mode, environment, config).await
+        let mut boot = create_app::<Self, Migrator>(mode, environment, config).await?;
+
+        let cors = CorsLayer::new()
+            .allow_methods([Method::GET, Method::POST, Method::PUT, Method::DELETE, Method::OPTIONS])
+            .allow_headers(Any)
+            .allow_origin(Any);
+
+        boot.router = Some(boot.router.take().unwrap().layer(cors));
+        Ok(boot)
     }
 
     async fn initializers(_ctx: &AppContext) -> Result<Vec<Box<dyn Initializer>>> {
@@ -46,9 +56,35 @@ impl Hooks for App {
     }
 
     fn routes(_ctx: &AppContext) -> AppRoutes {
-        AppRoutes::with_default_routes() // controller routes below
+        AppRoutes::with_default_routes()
             .add_route(controllers::auth::routes())
     }
+
+    async fn after_routes(router: axum::Router, _ctx: &AppContext) -> Result<axum::Router> {
+        let allowed_origin = std::env::var("ALLOWED_ORIGIN")
+            .unwrap_or_else(|_| "http://localhost:3000".to_string());
+
+        let origin = allowed_origin
+            .parse::<axum::http::HeaderValue>()
+            .expect("Invalid ALLOWED_ORIGIN value");
+
+        let cors = tower_http::cors::CorsLayer::new()
+            .allow_methods([
+                axum::http::Method::GET,
+                axum::http::Method::POST,
+                axum::http::Method::PUT,
+                axum::http::Method::DELETE,
+                axum::http::Method::OPTIONS,
+            ])
+            .allow_headers([
+                axum::http::header::CONTENT_TYPE,
+                axum::http::header::AUTHORIZATION,
+            ])
+            .allow_origin(origin);
+
+        Ok(router.layer(cors))
+    }
+
     async fn connect_workers(ctx: &AppContext, queue: &Queue) -> Result<()> {
         queue.register(DownloadWorker::build(ctx)).await?;
         Ok(())
@@ -56,7 +92,7 @@ impl Hooks for App {
 
     #[allow(unused_variables)]
     fn register_tasks(tasks: &mut Tasks) {
-        // tasks-inject (do not remove)
+        
     }
     async fn truncate(ctx: &AppContext) -> Result<()> {
         truncate_table(&ctx.db, users::Entity).await?;
