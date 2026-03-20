@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "markets": "Piyasalar",
+    "data": "Veri",
+    "conditions": "Koşullar",
+    "community": "Topluluk",
+    "sign_in": "Giriş Yap",
+    "account": "Hesap",
+    "signed_in_as": "Giriş yapan:",
+    "dashboard": "Panel",
+    "strategies": "Stratejiler",
+    "settings": "Ayarlar",
+    "api_keys": "API Anahtarları",
+    "sign_out": "Çıkış Yap"
+  },
+  "hero": {
+    "badge": "Veri · AI · Finans",
+    "title_1": "Piyasaları izle",
+    "title_2": "Koşulları tanımla",
+    "title_3": "Otomatikleştir",
+    "subtitle": "Fiyat ve haber verilerini takip et, koşullarını AI'a anlat, sistem koşullar karşılandığında otomatik olarak işlem emirlerini göndersin.",
+    "cta_primary": "Ücretsiz Başla",
+    "cta_secondary": "Giriş Yap",
+    "cta_dashboard": "Panele Git →",
+    "scroll": "KAYDIR"
+  },
+  "markets": {
+    "title": "Canlı Piyasalar",
+    "subtitle": "Gerçek Zamanlı Fiyat Akışı",
+    "live": "CANLI"
+  },
+  "how": {
+    "badge": "Nasıl Çalışır",
+    "title": "Üç adımda otomatik işlem",
+    "step1_title": "Verileri Takip Et",
+    "step1_desc": "Varlıkları, hisseleri, endeksleri ve haber akışlarını gerçek zamanlı takip et.",
+    "step2_title": "Koşulları Tanımla",
+    "step2_desc": "AI'ya koşullarını sade bir dille anlat. Kodlama bilgisine ihtiyacın yok.",
+    "step3_title": "Aracıyı İlişkilendir",
+    "step3_desc": "Koşullar karşılandığında sistem ilişkilendirdiğin aracıya işlem emirlerini gönderir."
+  },
+  "footer": {
+    "tagline": "Veri odaklı, AI destekli otomatik işlem platformu.",
+    "product": "Ürün",
+    "company": "Şirket",
+    "legal": "Yasal",
+    "language": "Dil",
+    "rights": "Tüm hakları saklıdır.",
+    "markets": "Piyasalar",
+    "data_feeds": "Veri Akışları",
+    "conditions": "Koşul Motoru",
+    "api": "API",
+    "about": "Hakkında",
+    "blog": "Blog",
+    "careers": "Kariyer",
+    "press": "Basın",
+    "privacy": "Gizlilik",
+    "terms": "Şartlar",
+    "cookies": "Çerezler",
+    "security": "Güvenlik"
+  },
+  "auth": {
+    "login": {
+      "title": "Giriş Yap",
+      "subtitle": "Hesabına giriş yap",
+      "email": "E-posta",
+      "password": "Şifre",
+      "button": "Giriş Yap",
+      "loading": "Giriş yapılıyor...",
+      "no_account": "Hesabın yok mu?",
+      "register_link": "Kayıt Ol",
+      "error": "Giriş başarısız"
+    },
+    "register": {
+      "title": "Kayıt Ol",
+      "subtitle": "Yeni hesap oluştur",
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "password": "Şifre (min 8 karakter)",
+      "button": "Kayıt Ol",
+      "loading": "Kayıt olunuyor...",
+      "has_account": "Zaten hesabın var mı?",
+      "login_link": "Giriş Yap",
+      "error": "Kayıt başarısız",
+      "success_title": "E-posta Gönderildi",
+      "success_desc": "Doğrulama linki gönderildi",
+      "go_login": "Girişe Git"
+    }
+  },
+  "dashboard": {
+    "title": "Panel",
+    "welcome": "Hoş geldin",
+    "logout": "Çıkış Yap"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "back": "Geri"
+  }
+}

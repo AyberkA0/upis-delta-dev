@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "markets": "Mercados",
+    "data": "Dados",
+    "conditions": "Condições",
+    "community": "Comunidade",
+    "sign_in": "Entrar",
+    "account": "Conta",
+    "signed_in_as": "Conectado como",
+    "dashboard": "Painel",
+    "strategies": "Estratégias",
+    "settings": "Configurações",
+    "api_keys": "Chaves API",
+    "sign_out": "Sair"
+  },
+  "hero": {
+    "badge": "Dados · IA · Execução",
+    "title_1": "Monitorar mercados",
+    "title_2": "Definir condições",
+    "title_3": "Automatizar ordens",
+    "subtitle": "Acompanhe dados de preços e notícias, descreva suas condições para a IA e deixe o sistema enviar ordens de negociação automaticamente quando as condições forem atendidas.",
+    "cta_primary": "Comece grátis",
+    "cta_secondary": "Entrar",
+    "cta_dashboard": "Ir para o painel →",
+    "scroll": "ROLAR"
+  },
+  "markets": {
+    "title": "Mercados ao vivo",
+    "subtitle": "Feed de preços em tempo real",
+    "live": "AO VIVO"
+  },
+  "how": {
+    "badge": "Como funciona",
+    "title": "Negociação automatizada em três etapas",
+    "step1_title": "Monitorar dados",
+    "step1_desc": "Acompanhe ativos, ações, índices e notícias em tempo real.",
+    "step2_title": "Definir condições",
+    "step2_desc": "Diga à IA suas condições em linguagem simples. Não é necessário programar.",
+    "step3_title": "Executar ordens",
+    "step3_desc": "Quando as condições forem atendidas, o sistema envia ordens de negociação automaticamente para seu corretor conectado."
+  },
+  "footer": {
+    "tagline": "Plataforma de negociação automatizada orientada por dados e IA.",
+    "product": "Produto",
+    "company": "Empresa",
+    "legal": "Legal",
+    "language": "Idioma",
+    "rights": "Todos os direitos reservados.",
+    "markets": "Mercados",
+    "data_feeds": "Feeds de dados",
+    "conditions": "Motor de condições",
+    "api": "API",
+    "about": "Sobre",
+    "blog": "Blog",
+    "careers": "Carreiras",
+    "press": "Imprensa",
+    "privacy": "Privacidade",
+    "terms": "Termos",
+    "cookies": "Cookies",
+    "security": "Segurança"
+  },
+  "auth": {
+    "login": {
+      "title": "Entrar",
+      "subtitle": "Entre na sua conta",
+      "email": "E-mail",
+      "password": "Senha",
+      "button": "Entrar",
+      "loading": "Entrando...",
+      "no_account": "Não tem uma conta?",
+      "register_link": "Registrar",
+      "error": "Falha no login"
+    },
+    "register": {
+      "title": "Registrar",
+      "subtitle": "Criar uma nova conta",
+      "name": "Nome completo",
+      "email": "E-mail",
+      "password": "Senha (mínimo 8 caracteres)",
+      "button": "Registrar",
+      "loading": "Registrando...",
+      "has_account": "Já tem uma conta?",
+      "login_link": "Entrar",
+      "error": "Falha no registro",
+      "success_title": "E-mail enviado",
+      "success_desc": "Um link de verificação foi enviado para",
+      "go_login": "Ir para o login"
+    }
+  },
+  "dashboard": {
+    "title": "Painel",
+    "welcome": "Bem-vindo",
+    "logout": "Sair"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Ocorreu um erro",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "back": "Voltar"
+  }
+}

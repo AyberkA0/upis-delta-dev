@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "markets": "Mercados",
+    "data": "Datos",
+    "conditions": "Condiciones",
+    "community": "Comunidad",
+    "sign_in": "Iniciar sesión",
+    "account": "Cuenta",
+    "signed_in_as": "Conectado como",
+    "dashboard": "Panel",
+    "strategies": "Estrategias",
+    "settings": "Configuración",
+    "api_keys": "Claves API",
+    "sign_out": "Cerrar sesión"
+  },
+  "hero": {
+    "badge": "Datos · IA · Ejecución",
+    "title_1": "Supervisar mercados",
+    "title_2": "Definir condiciones",
+    "title_3": "Automatizar órdenes",
+    "subtitle": "Sigue datos de precios y noticias, describe tus condiciones a la IA y deja que el sistema envíe órdenes de trading automáticamente cuando se cumplan las condiciones.",
+    "cta_primary": "Comienza gratis",
+    "cta_secondary": "Iniciar sesión",
+    "cta_dashboard": "Ir al panel →",
+    "scroll": "DESPLAZAR"
+  },
+  "markets": {
+    "title": "Mercados en vivo",
+    "subtitle": "Feed de precios en tiempo real",
+    "live": "EN VIVO"
+  },
+  "how": {
+    "badge": "Cómo funciona",
+    "title": "Trading automatizado en tres pasos",
+    "step1_title": "Monitorear datos",
+    "step1_desc": "Sigue activos, acciones, índices y noticias en tiempo real.",
+    "step2_title": "Definir condiciones",
+    "step2_desc": "Dile a la IA tus condiciones en lenguaje sencillo. No se requiere programación.",
+    "step3_title": "Ejecutar órdenes",
+    "step3_desc": "Cuando se cumplan las condiciones, el sistema envía órdenes de trading automáticamente a tu broker conectado."
+  },
+  "footer": {
+    "tagline": "Plataforma de trading automatizado impulsada por datos e IA.",
+    "product": "Producto",
+    "company": "Empresa",
+    "legal": "Legal",
+    "language": "Idioma",
+    "rights": "Todos los derechos reservados.",
+    "markets": "Mercados",
+    "data_feeds": "Feeds de datos",
+    "conditions": "Motor de condiciones",
+    "api": "API",
+    "about": "Acerca de",
+    "blog": "Blog",
+    "careers": "Carreras",
+    "press": "Prensa",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "cookies": "Cookies",
+    "security": "Seguridad"
+  },
+  "auth": {
+    "login": {
+      "title": "Iniciar sesión",
+      "subtitle": "Accede a tu cuenta",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "button": "Iniciar sesión",
+      "loading": "Iniciando sesión...",
+      "no_account": "¿No tienes una cuenta?",
+      "register_link": "Registrarse",
+      "error": "Error de inicio de sesión"
+    },
+    "register": {
+      "title": "Registrarse",
+      "subtitle": "Crear una nueva cuenta",
+      "name": "Nombre completo",
+      "email": "Correo electrónico",
+      "password": "Contraseña (mínimo 8 caracteres)",
+      "button": "Registrarse",
+      "loading": "Registrando...",
+      "has_account": "¿Ya tienes una cuenta?",
+      "login_link": "Iniciar sesión",
+      "error": "Error de registro",
+      "success_title": "Correo enviado",
+      "success_desc": "Se envió un enlace de verificación a",
+      "go_login": "Ir al inicio de sesión"
+    }
+  },
+  "dashboard": {
+    "title": "Panel",
+    "welcome": "Bienvenido",
+    "logout": "Cerrar sesión"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "back": "Atrás"
+  }
+}

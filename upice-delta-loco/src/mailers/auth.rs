@@ -1,4 +1,3 @@
-// auth mailer
 #![allow(non_upper_case_globals)]
 
 use loco_rs::prelude::*;
@@ -19,6 +18,9 @@ pub struct AuthMailer {}
 impl Mailer for AuthMailer {}
 impl AuthMailer {
     pub async fn send_welcome(ctx: &AppContext, user: &users::Model) -> Result<()> {
+        let frontend_url = std::env::var("ALLOWED_ORIGIN")
+            .unwrap_or_else(|_| "http://localhost:3000".to_string());
+
         Self::mail_template(
             ctx,
             &welcome,
@@ -26,9 +28,9 @@ impl AuthMailer {
                 from: Some(mailer_from()),
                 to: user.email.to_string(),
                 locals: json!({
-                  "name": user.name,
-                  "verifyToken": user.email_verification_token,
-                  "domain": ctx.config.server.full_url()
+                "name": user.name,
+                "verifyToken": user.email_verification_token,
+                "domain": frontend_url
                 }),
                 ..Default::default()
             },
@@ -39,6 +41,9 @@ impl AuthMailer {
     }
 
     pub async fn forgot_password(ctx: &AppContext, user: &users::Model) -> Result<()> {
+        let frontend_url = std::env::var("ALLOWED_ORIGIN")
+            .unwrap_or_else(|_| "http://localhost:3000".to_string());
+
         Self::mail_template(
             ctx,
             &forgot,
@@ -46,9 +51,9 @@ impl AuthMailer {
                 from: Some(mailer_from()),
                 to: user.email.to_string(),
                 locals: json!({
-                  "name": user.name,
-                  "resetToken": user.reset_token,
-                  "domain": ctx.config.server.full_url()
+                "name": user.name,
+                "resetToken": user.reset_token,
+                "domain": frontend_url
                 }),
                 ..Default::default()
             },

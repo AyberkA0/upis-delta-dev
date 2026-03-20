@@ -20,13 +20,13 @@ impl MigrationTrait for Migration {
                 ("reset_token", ColType::StringNull),
                 ("reset_sent_at", ColType::TimestampWithTimeZoneNull),
                 ("email_verification_token", ColType::StringNull),
-                (
-                    "email_verification_sent_at",
-                    ColType::TimestampWithTimeZoneNull,
-                ),
+                ("email_verification_sent_at", ColType::TimestampWithTimeZoneNull),
                 ("email_verified_at", ColType::TimestampWithTimeZoneNull),
                 ("magic_link_token", ColType::StringNull),
                 ("magic_link_expiration", ColType::TimestampWithTimeZoneNull),
+                ("permission_level", ColType::IntegerWithDefault(0)),
+                ("plan_code", ColType::IntegerWithDefault(0)),
+                ("phone_number", ColType::StringNull),
             ],
             &[],
         )

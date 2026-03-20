@@ -34,7 +34,6 @@ export default function PriceCard({ title, subtitle, price, change, positive, co
           </div>
           <div style={{
             fontSize: 20, fontWeight: 700, color: '#0A0A0A',
-            fontFamily: "'Playfair Display', serif",
           }}>
             {title}
           </div>
@@ -51,7 +50,6 @@ export default function PriceCard({ title, subtitle, price, change, positive, co
 
       <div style={{
         fontSize: 30, fontWeight: 800, color: '#0A0A0A',
-        fontFamily: "'Playfair Display', serif", marginBottom: 16,
       }}>
         {price}
       </div>

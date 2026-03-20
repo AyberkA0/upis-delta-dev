@@ -17,6 +17,7 @@ const LANGUAGES = [
 export default function LanguageSwitcher() {
   const { i18n } = useTranslation()
   const [open, setOpen] = useState(false)
+  const [openUp, setOpenUp] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   const current = LANGUAGES.find(l => l.code === i18n.language) || LANGUAGES[1]
@@ -29,34 +30,45 @@ export default function LanguageSwitcher() {
     return () => document.removeEventListener('mousedown', handler)
   }, [])
 
+  const toggleDropdown = () => {
+    if (ref.current) {
+      const rect = ref.current.getBoundingClientRect()
+      const middle = window.innerHeight / 2
+
+      setOpenUp(rect.top > middle)
+    }
+    setOpen(o => !o)
+  }
+
   return (
     <div ref={ref} style={{ position: 'relative' }}>
       <button
-        onClick={() => setOpen(o => !o)}
+        onClick={toggleDropdown}
         style={{
           display: 'flex', alignItems: 'center', gap: 6,
           background: 'transparent',
           border: '1px solid #1e2530',
-          borderRadius: 8, padding: '5px 12px',
+          borderRadius: 8, padding: '10px 24px',
           cursor: 'pointer', fontSize: 12, fontWeight: 600,
           color: '#5a6a7e', fontFamily: "'DM Mono', monospace",
           transition: 'all 0.15s',
         }}
-        onMouseEnter={e => e.currentTarget.style.borderColor = '#2F5285'}
-        onMouseLeave={e => e.currentTarget.style.borderColor = '#1e2530'}
       >
-        <span>{current.flag}</span>
         <span>{current.label}</span>
         <span style={{ fontSize: 9, opacity: 0.5 }}>{open ? '▲' : '▼'}</span>
       </button>
 
       {open && (
         <div style={{
-          position: 'absolute', bottom: 'calc(100% + 8px)', left: 0,
+          position: 'absolute',
+          ...(openUp
+            ? { bottom: 'calc(100% + 8px)' }
+            : { top: 'calc(100% + 8px)' }
+          ),
+          left: 0,
           width: 160,
           background: 'rgba(255,255,255,0.95)',
           backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
           border: '1px solid rgba(47,82,133,0.15)',
           borderRadius: 12,
           boxShadow: '0 8px 32px rgba(47,82,133,0.12)',
@@ -73,18 +85,9 @@ export default function LanguageSwitcher() {
                 padding: '9px 14px', border: 'none',
                 background: i18n.language === lang.code ? 'rgba(47,82,133,0.08)' : 'transparent',
                 cursor: 'pointer', fontSize: 12,
-                color: i18n.language === lang.code ? '#2F5285' : '#0A0A0A',
+                color: i18n.language === lang.code ? '#496fa8' : '#0A0A0A',
                 fontFamily: "'DM Mono', monospace",
                 fontWeight: i18n.language === lang.code ? 700 : 400,
-                transition: 'background 0.15s',
-              }}
-              onMouseEnter={e => {
-                if (i18n.language !== lang.code)
-                  e.currentTarget.style.background = 'rgba(47,82,133,0.05)'
-              }}
-              onMouseLeave={e => {
-                if (i18n.language !== lang.code)
-                  e.currentTarget.style.background = 'transparent'
               }}
             >
               <span style={{ fontSize: 16 }}>{lang.flag}</span>

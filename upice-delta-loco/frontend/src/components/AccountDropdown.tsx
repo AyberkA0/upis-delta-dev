@@ -31,9 +31,8 @@ export default function AccountDropdown({ username, onLogout }: Props) {
 
   const items = [
     { label: t('nav.dashboard'),  action: () => { navigate('/dashboard'); setOpen(false) } },
-    { label: t('nav.strategies'), action: () => { navigate('/strategies'); setOpen(false) } },
-    { label: t('nav.settings'),   action: () => setOpen(false) },
-    { label: t('nav.api_keys'),   action: () => setOpen(false) },
+    { label: t('nav.settings'),   action: () => { navigate('/settings'); setOpen(false) }},
+    { label: t('nav.help'),       action: () => { navigate('/help'); setOpen(false) } },
   ]
 
   return (
@@ -70,7 +69,7 @@ export default function AccountDropdown({ username, onLogout }: Props) {
             <div style={{ fontSize: 11, color: '#7A6B72', fontFamily: "'DM Mono', monospace", marginBottom: 2 }}>
               {t('nav.signed_in_as')}
             </div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: '#0A0A0A', fontFamily: "'Playfair Display', serif" }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: '#0A0A0A' }}>
               {username}
             </div>
           </div>

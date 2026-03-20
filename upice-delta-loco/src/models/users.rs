@@ -223,6 +223,30 @@ impl Model {
         db: &DatabaseConnection,
         params: &RegisterParams,
     ) -> ModelResult<Self> {
+        if params.password.len() < 8 {
+            return Err(ModelError::Any(
+                Box::new(std::io::Error::new(std::io::ErrorKind::InvalidInput, "Password must be at least 8 characters"))
+            ));
+        }
+
+        if !params.password.chars().any(|c| c.is_uppercase()) {
+            return Err(ModelError::Any(
+                Box::new(std::io::Error::new(std::io::ErrorKind::InvalidInput, "Password must contain at least one uppercase letter"))
+            ));
+        }
+
+        if !params.password.chars().any(|c| c.is_numeric()) {
+            return Err(ModelError::Any(
+                Box::new(std::io::Error::new(std::io::ErrorKind::InvalidInput, "Password must contain at least one number"))
+            ));
+        }
+
+        if !params.password.chars().any(|c| !c.is_alphanumeric()) {
+            return Err(ModelError::Any(
+                Box::new(std::io::Error::new(std::io::ErrorKind::InvalidInput, "Password must contain at least one special character"))
+            ));
+        }
+
         let txn = db.begin().await?;
 
         if users::Entity::find()

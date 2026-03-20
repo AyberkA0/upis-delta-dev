@@ -1,9 +1,10 @@
 {
   "nav": {
+    "overview": "Overview",
     "markets": "Markets",
-    "data": "Data",
-    "conditions": "Conditions",
-    "community": "Community",
+    "blog": "Blog",
+    "roadmap": "Roadmap",
+    "faqs": "FAQs",
     "sign_in": "Sign In",
     "account": "Account",
     "signed_in_as": "Signed in as",
@@ -11,13 +12,14 @@
     "strategies": "Strategies",
     "settings": "Settings",
     "api_keys": "API Keys",
-    "sign_out": "Sign Out"
+    "sign_out": "Sign Out",
+    "help": "Help"
   },
   "hero": {
-    "badge": "Data · AI · Execution",
-    "title_1": "Monitor markets.",
-    "title_2": "Define conditions.",
-    "title_3": "Automate orders.",
+    "badge": "Data · AI · Action",
+    "title_1": "Monitor markets",
+    "title_2": "Define conditions",
+    "title_3": "Automate orders",
     "subtitle": "Track price and news data, describe your conditions to AI, and let the system automatically send trade orders when conditions are met.",
     "cta_primary": "Get Started Free",
     "cta_secondary": "Sign In",
@@ -33,7 +35,7 @@
     "badge": "How It Works",
     "title": "Automated trading in three steps",
     "step1_title": "Monitor Data",
-    "step1_desc": "Track BTC, equities, indices and news feeds in real time.",
+    "step1_desc": "Track assets, equities, indices and news feeds in real time.",
     "step2_title": "Define Conditions",
     "step2_desc": "Tell the AI your conditions in plain language. No coding required.",
     "step3_title": "Execute Orders",
@@ -43,10 +45,10 @@
     "tagline": "Data-driven, AI-powered automated trading platform.",
     "product": "Product",
     "company": "Company",
+    "links": "Links",
     "legal": "Legal",
     "language": "Language",
     "rights": "All rights reserved.",
-    "markets": "Markets",
     "data_feeds": "Data Feeds",
     "conditions": "Condition Engine",
     "api": "API",
@@ -57,7 +59,11 @@
     "privacy": "Privacy",
     "terms": "Terms",
     "cookies": "Cookies",
-    "security": "Security"
+    "security": "Security",
+    "markets": "Markets",
+    "roadmap": "Roadmap",
+    "faqs": "FAQs",
+    "overview": "Overview"
   },
   "auth": {
     "login": {
@@ -100,5 +106,10 @@
     "delete": "Delete",
     "edit": "Edit",
     "back": "Back"
+  },
+  "platforms": {
+    "title": "Supported Trading Platforms",
+    "connected": "Supported",
+    "in_progress": "In progress"
   }
 }

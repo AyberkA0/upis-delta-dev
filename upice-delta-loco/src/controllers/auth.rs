@@ -15,7 +15,9 @@ pub static EMAIL_DOMAIN_RE: OnceLock<Regex> = OnceLock::new();
 
 fn get_allow_email_domain_re() -> &'static Regex {
     EMAIL_DOMAIN_RE.get_or_init(|| {
-        Regex::new(r"@example\.com$|@gmail\.com$").expect("Failed to compile regex")
+        Regex::new(
+            r"^[^+@]+@(gmail\.com|outlook\.com|hotmail\.com|proton\.me|protonmail\.com|pm\.me)$"
+        ).expect("Failed to compile regex")
     })
 }
 
@@ -203,6 +205,14 @@ async fn login(State(ctx): State<AppContext>, Json(params): Json<LoginParams>) -
 
     if !valid {
         return unauthorized("unauthorized!");
+    }
+
+    if !valid {
+        return unauthorized("unauthorized!");
+    }
+
+    if user.email_verified_at.is_none() {
+        return unauthorized("Please verify your email address before signing in.");
     }
 
     let jwt_secret = ctx.config.get_jwt_config()?;

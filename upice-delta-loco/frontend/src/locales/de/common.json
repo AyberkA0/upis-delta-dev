@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "markets": "Märkte",
+    "data": "Daten",
+    "conditions": "Bedingungen",
+    "community": "Community",
+    "sign_in": "Anmelden",
+    "account": "Konto",
+    "signed_in_as": "Angemeldet als",
+    "dashboard": "Dashboard",
+    "strategies": "Strategien",
+    "settings": "Einstellungen",
+    "api_keys": "API-Schlüssel",
+    "sign_out": "Abmelden"
+  },
+  "hero": {
+    "badge": "Daten · KI · Ausführung",
+    "title_1": "Märkte überwachen",
+    "title_2": "Bedingungen definieren",
+    "title_3": "Aufträge automatisieren",
+    "subtitle": "Verfolge Preis- und Nachrichten-Daten, beschreibe deine Bedingungen der KI und lasse das System automatisch Handelsaufträge senden, wenn Bedingungen erfüllt sind.",
+    "cta_primary": "Kostenlos starten",
+    "cta_secondary": "Anmelden",
+    "cta_dashboard": "Zum Dashboard →",
+    "scroll": "SCROLLEN"
+  },
+  "markets": {
+    "title": "Live-Märkte",
+    "subtitle": "Echtzeit-Preisdaten",
+    "live": "LIVE"
+  },
+  "how": {
+    "badge": "Wie es funktioniert",
+    "title": "Automatisierter Handel in drei Schritten",
+    "step1_title": "Daten überwachen",
+    "step1_desc": "Verfolge Vermögenswerte, Aktien, Indizes und Nachrichtenfeeds in Echtzeit.",
+    "step2_title": "Bedingungen definieren",
+    "step2_desc": "Teile der KI deine Bedingungen in einfacher Sprache mit. Kein Programmieren nötig.",
+    "step3_title": "Orders ausführen",
+    "step3_desc": "Wenn Bedingungen erfüllt sind, sendet das System automatisch Handelsaufträge an deinen Broker."
+  },
+  "footer": {
+    "tagline": "Datengetriebene, KI-gestützte automatisierte Handelsplattform.",
+    "product": "Produkt",
+    "company": "Unternehmen",
+    "legal": "Rechtliches",
+    "language": "Sprache",
+    "rights": "Alle Rechte vorbehalten.",
+    "markets": "Märkte",
+    "data_feeds": "Datenfeeds",
+    "conditions": "Bedingungs-Engine",
+    "api": "API",
+    "about": "Über uns",
+    "blog": "Blog",
+    "careers": "Karriere",
+    "press": "Presse",
+    "privacy": "Datenschutz",
+    "terms": "Bedingungen",
+    "cookies": "Cookies",
+    "security": "Sicherheit"
+  },
+  "auth": {
+    "login": {
+      "title": "Anmelden",
+      "subtitle": "Melde dich bei deinem Konto an",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "button": "Anmelden",
+      "loading": "Anmeldung läuft...",
+      "no_account": "Noch kein Konto?",
+      "register_link": "Registrieren",
+      "error": "Anmeldung fehlgeschlagen"
+    },
+    "register": {
+      "title": "Registrieren",
+      "subtitle": "Neues Konto erstellen",
+      "name": "Vollständiger Name",
+      "email": "E-Mail",
+      "password": "Passwort (mind. 8 Zeichen)",
+      "button": "Registrieren",
+      "loading": "Registrierung läuft...",
+      "has_account": "Bereits ein Konto?",
+      "login_link": "Anmelden",
+      "error": "Registrierung fehlgeschlagen",
+      "success_title": "E-Mail gesendet",
+      "success_desc": "Ein Bestätigungslink wurde gesendet an",
+      "go_login": "Zum Login"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Willkommen",
+    "logout": "Abmelden"
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "back": "Zurück"
+  }
+}

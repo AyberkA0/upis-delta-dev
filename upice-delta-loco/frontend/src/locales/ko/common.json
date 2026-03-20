@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "markets": "마켓",
+    "data": "데이터",
+    "conditions": "조건",
+    "community": "커뮤니티",
+    "sign_in": "로그인",
+    "account": "계정",
+    "signed_in_as": "로그인됨:",
+    "dashboard": "대시보드",
+    "strategies": "전략",
+    "settings": "설정",
+    "api_keys": "API 키",
+    "sign_out": "로그아웃"
+  },
+  "hero": {
+    "badge": "데이터 · AI · 실행",
+    "title_1": "시장 모니터링",
+    "title_2": "조건 정의",
+    "title_3": "주문 자동화",
+    "subtitle": "가격 및 뉴스 데이터를 추적하고, 조건을 AI에 설명하면 조건이 충족될 때 시스템이 자동으로 거래 주문을 보냅니다.",
+    "cta_primary": "무료 시작",
+    "cta_secondary": "로그인",
+    "cta_dashboard": "대시보드로 이동 →",
+    "scroll": "스크롤"
+  },
+  "markets": {
+    "title": "실시간 마켓",
+    "subtitle": "실시간 가격 피드",
+    "live": "LIVE"
+  },
+  "how": {
+    "badge": "작동 방식",
+    "title": "3단계 자동 거래",
+    "step1_title": "데이터 모니터링",
+    "step1_desc": "실시간으로 자산, 주식, 지수, 뉴스 피드를 추적합니다.",
+    "step2_title": "조건 정의",
+    "step2_desc": "AI에 조건을 쉬운 언어로 설명하세요. 코딩 필요 없음.",
+    "step3_title": "주문 실행",
+    "step3_desc": "조건이 충족되면 시스템이 자동으로 연결된 브로커에 거래 주문을 보냅니다."
+  },
+  "footer": {
+    "tagline": "데이터 기반, AI 지원 자동 거래 플랫폼.",
+    "product": "제품",
+    "company": "회사",
+    "legal": "법적",
+    "language": "언어",
+    "rights": "모든 권리 보유.",
+    "markets": "마켓",
+    "data_feeds": "데이터 피드",
+    "conditions": "조건 엔진",
+    "api": "API",
+    "about": "소개",
+    "blog": "블로그",
+    "careers": "채용",
+    "press": "언론",
+    "privacy": "개인정보",
+    "terms": "이용약관",
+    "cookies": "쿠키",
+    "security": "보안"
+  },
+  "auth": {
+    "login": {
+      "title": "로그인",
+      "subtitle": "계정에 로그인",
+      "email": "이메일",
+      "password": "비밀번호",
+      "button": "로그인",
+      "loading": "로그인 중...",
+      "no_account": "계정이 없으신가요?",
+      "register_link": "가입",
+      "error": "로그인 실패"
+    },
+    "register": {
+      "title": "가입",
+      "subtitle": "새 계정 만들기",
+      "name": "이름",
+      "email": "이메일",
+      "password": "비밀번호 (최소 8자)",
+      "button": "가입",
+      "loading": "가입 중...",
+      "has_account": "이미 계정이 있으신가요?",
+      "login_link": "로그인",
+      "error": "가입 실패",
+      "success_title": "이메일 전송됨",
+      "success_desc": "확인 링크가 전송되었습니다:",
+      "go_login": "로그인으로 이동"
+    }
+  },
+  "dashboard": {
+    "title": "대시보드",
+    "welcome": "환영합니다",
+    "logout": "로그아웃"
+  },
+  "common": {
+    "loading": "로딩 중...",
+    "error": "오류 발생",
+    "save": "저장",
+    "cancel": "취소",
+    "delete": "삭제",
+    "edit": "편집",
+    "back": "뒤로"
+  }
+}

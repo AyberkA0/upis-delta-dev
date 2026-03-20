@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "markets": "市场",
+    "data": "数据",
+    "conditions": "条件",
+    "community": "社区",
+    "sign_in": "登录",
+    "account": "账户",
+    "signed_in_as": "已登录：",
+    "dashboard": "仪表盘",
+    "strategies": "策略",
+    "settings": "设置",
+    "api_keys": "API密钥",
+    "sign_out": "登出"
+  },
+  "hero": {
+    "badge": "数据 · AI · 执行",
+    "title_1": "监控市场",
+    "title_2": "定义条件",
+    "title_3": "自动化订单",
+    "subtitle": "跟踪价格和新闻数据，向AI描述你的条件，系统在条件满足时自动发送交易订单。",
+    "cta_primary": "免费开始",
+    "cta_secondary": "登录",
+    "cta_dashboard": "前往仪表盘 →",
+    "scroll": "滚动"
+  },
+  "markets": {
+    "title": "实时市场",
+    "subtitle": "实时价格推送",
+    "live": "直播"
+  },
+  "how": {
+    "badge": "工作原理",
+    "title": "三步自动交易",
+    "step1_title": "监控数据",
+    "step1_desc": "实时跟踪资产、股票、指数和新闻。",
+    "step2_title": "定义条件",
+    "step2_desc": "用简单语言告诉AI你的条件。无需编码。",
+    "step3_title": "执行订单",
+    "step3_desc": "条件满足时，系统自动向你的券商发送交易订单。"
+  },
+  "footer": {
+    "tagline": "数据驱动、AI赋能的自动交易平台。",
+    "product": "产品",
+    "company": "公司",
+    "legal": "法律",
+    "language": "语言",
+    "rights": "版权所有",
+    "markets": "市场",
+    "data_feeds": "数据推送",
+    "conditions": "条件引擎",
+    "api": "API",
+    "about": "关于",
+    "blog": "博客",
+    "careers": "招聘",
+    "press": "新闻",
+    "privacy": "隐私",
+    "terms": "条款",
+    "cookies": "Cookies",
+    "security": "安全"
+  },
+  "auth": {
+    "login": {
+      "title": "登录",
+      "subtitle": "登录你的账户",
+      "email": "邮箱",
+      "password": "密码",
+      "button": "登录",
+      "loading": "登录中...",
+      "no_account": "没有账户？",
+      "register_link": "注册",
+      "error": "登录失败"
+    },
+    "register": {
+      "title": "注册",
+      "subtitle": "创建新账户",
+      "name": "姓名",
+      "email": "邮箱",
+      "password": "密码（至少8位）",
+      "button": "注册",
+      "loading": "注册中...",
+      "has_account": "已有账户？",
+      "login_link": "登录",
+      "error": "注册失败",
+      "success_title": "邮件已发送",
+      "success_desc": "已发送验证链接至",
+      "go_login": "前往登录"
+    }
+  },
+  "dashboard": {
+    "title": "仪表盘",
+    "welcome": "欢迎",
+    "logout": "登出"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "back": "返回"
+  }
+}
