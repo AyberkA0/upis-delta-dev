@@ -91,7 +91,7 @@
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="font-size:12px;color:#7A6B72;line-height:1.7;">
-                    <strong style="color:#0A0A0A;">Upis Delta</strong><br>
+                    <strong style="color:#fff;">Upis Delta</strong><br>
                     Real-time data · AI condition execution · Order automation
                   </td>
                   <td align="right" style="font-size:11px;color:#A8BDD0;">

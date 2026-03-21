@@ -4,7 +4,10 @@ interface AuthResponse {
   token: string
   pid: string
   name: string
+  email: string
   is_verified: boolean
+  permission_level: number
+  plan_code: number
 }
 
 export const authApi = {

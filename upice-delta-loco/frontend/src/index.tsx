@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './i18n'
 import './index.css'
 
+import ScrollToTop from './components/ScrollToTop'
+
 import Login from './pages/user/Login'
 import Register from './pages/user/Register'
 import ForgotPassword from './pages/user/ForgotPassword'
@@ -11,6 +13,7 @@ import ResetPassword from './pages/user/ResetPassword'
 import Dashboard from './pages/user/Dashboard' // TO DO
 import Settings from './pages/user/Settings' // TO DO
 import Help from './pages/user/Help' // TO DO
+import NewBlogPost from './pages/user/NewBlogPost'
 
 import Terms from './pages/legal/Terms'
 import Privacy from './pages/legal/Privacy'
@@ -21,6 +24,7 @@ import Landing from './pages/general/Landing'
 import FAQs from './pages/general/FAQs'
 import Roadmap from './pages/general/Roadmap' // TO DO
 import Blog from './pages/general/Blog' // TO DO
+import BlogPost from './pages/general/BlogPost'
 import Overview from './pages/general/Overview' // TO DO
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -31,6 +35,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -40,6 +45,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/help" element={<Help />} />
+        <Route path="/blog/new" element={<NewBlogPost />} />
 
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
@@ -48,6 +54,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
         <Route path="/overview" element={<Overview />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/roadmap" element={<Roadmap />} />
         <Route path="/faqs" element={<FAQs />} />
       </Routes>

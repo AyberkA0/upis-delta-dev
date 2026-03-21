@@ -79,20 +79,76 @@ async fn verify(State(ctx): State<AppContext>, Path(token): Path<String>) -> Res
             <html>
             <head>
                 <meta charset="UTF-8">
-                <title>Geçersiz Token</title>
+                <title>Invalid Token</title>
                 <style>
-                    body { font-family: monospace; background: #0a0c0f; color: #e8edf5; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-                    .box { text-align: center; padding: 48px; border: 1px solid #1e2530; border-radius: 8px; background: #111418; }
-                    h1 { color: #ff4757; font-size: 24px; margin-bottom: 12px; }
-                    p { color: #5a6a7e; margin-bottom: 24px; }
-                    a { color: #00d4a8; text-decoration: none; }
+                    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Mono:wght@400;500;600&display=swap');
+                    * { margin: 0; padding: 0; box-sizing: border-box; }
+                    body { 
+                        font-family: 'DM Mono', monospace; 
+                        background: #F4F6FA; 
+                        color: #0A0A0A; 
+                        display: flex; 
+                        align-items: center; 
+                        justify-content: center; 
+                        min-height: 100vh; 
+                    }
+                    .container {
+                        text-align: center;
+                        padding: 40px 24px;
+                        max-width: 480px;
+                        width: 100%;
+                    }
+                    .box {
+                        background: #fff;
+                        border: 1px solid rgba(47,82,133,0.08);
+                        border-radius: 20px;
+                        padding: 60px 40px;
+                        box-shadow: 0 4px 24px rgba(47,82,133,0.06);
+                    }
+                    .icon {
+                        font-size: 48px;
+                        margin-bottom: 20px;
+                        opacity: 0.3;
+                    }
+                    h1 {
+                        font-family: 'Playfair Display', serif;
+                        font-size: 24px;
+                        font-weight: 700;
+                        color: #dc2626;
+                        margin-bottom: 12px;
+                    }
+                    p {
+                        color: #7A6B72;
+                        font-size: 13px;
+                        line-height: 1.7;
+                        margin-bottom: 28px;
+                    }
+                    a {
+                        display: inline-block;
+                        padding: 12px 28px;
+                        background: rgba(47,82,133,0.08);
+                        border: 1px solid rgba(47,82,133,0.15);
+                        border-radius: 10px;
+                        color: #2F5285;
+                        text-decoration: none;
+                        font-size: 13px;
+                        font-weight: 600;
+                        transition: all 0.2s;
+                    }
+                    a:hover {
+                        background: rgba(47,82,133,0.14);
+                        border-color: rgba(47,82,133,0.28);
+                    }
                 </style>
             </head>
             <body>
-                <div class="box">
-                    <h1>Geçersiz Token</h1>
-                    <p>Bu doğrulama linki geçersiz veya süresi dolmuş.</p>
-                    <a href="http://localhost:3000/login">Giriş sayfasına dön</a>
+                <div class="container">
+                    <div class="box">
+                        <div class="icon">🔗</div>
+                        <h1>Invalid Token</h1>
+                        <p>This verification link is invalid or has expired.</p>
+                        <a href="http://localhost:3000/login">Back to Login</a>
+                    </div>
                 </div>
             </body>
             </html>
@@ -105,20 +161,75 @@ async fn verify(State(ctx): State<AppContext>, Path(token): Path<String>) -> Res
             <html>
             <head>
                 <meta charset="UTF-8">
-                <title>Zaten Doğrulandı</title>
+                <title>Already Verified</title>
                 <style>
-                    body { font-family: monospace; background: #0a0c0f; color: #e8edf5; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-                    .box { text-align: center; padding: 48px; border: 1px solid #1e2530; border-radius: 8px; background: #111418; }
-                    h1 { color: #00d4a8; font-size: 24px; margin-bottom: 12px; }
-                    p { color: #5a6a7e; margin-bottom: 24px; }
-                    a { color: #00d4a8; text-decoration: none; }
+                    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Mono:wght@400;500;600&display=swap');
+                    * { margin: 0; padding: 0; box-sizing: border-box; }
+                    body { 
+                        font-family: 'DM Mono', monospace; 
+                        background: #F4F6FA; 
+                        color: #0A0A0A; 
+                        display: flex; 
+                        align-items: center; 
+                        justify-content: center; 
+                        min-height: 100vh; 
+                    }
+                    .container {
+                        text-align: center;
+                        padding: 40px 24px;
+                        max-width: 480px;
+                        width: 100%;
+                    }
+                    .box {
+                        background: #fff;
+                        border: 1px solid rgba(47,82,133,0.08);
+                        border-radius: 20px;
+                        padding: 60px 40px;
+                        box-shadow: 0 4px 24px rgba(47,82,133,0.06);
+                    }
+                    .icon {
+                        font-size: 48px;
+                        margin-bottom: 20px;
+                    }
+                    h1 {
+                        font-family: 'Playfair Display', serif;
+                        font-size: 24px;
+                        font-weight: 700;
+                        color: #0A0A0A;
+                        margin-bottom: 12px;
+                    }
+                    p {
+                        color: #7A6B72;
+                        font-size: 13px;
+                        line-height: 1.7;
+                        margin-bottom: 28px;
+                    }
+                    a {
+                        display: inline-block;
+                        padding: 12px 28px;
+                        background: rgba(47,82,133,0.08);
+                        border: 1px solid rgba(47,82,133,0.15);
+                        border-radius: 10px;
+                        color: #2F5285;
+                        text-decoration: none;
+                        font-size: 13px;
+                        font-weight: 600;
+                        transition: all 0.2s;
+                    }
+                    a:hover {
+                        background: rgba(47,82,133,0.14);
+                        border-color: rgba(47,82,133,0.28);
+                    }
                 </style>
             </head>
             <body>
-                <div class="box">
-                    <h1>Zaten Doğrulandı</h1>
-                    <p>Bu hesap zaten doğrulanmış.</p>
-                    <a href="http://localhost:3000/login">Giriş yap</a>
+                <div class="container">
+                    <div class="box">
+                        <div class="icon">✓</div>
+                        <h1>Already Verified</h1>
+                        <p>This account is already verified. You can sign in.</p>
+                        <a href="http://localhost:3000/login">Go to Login</a>
+                    </div>
                 </div>
             </body>
             </html>
@@ -134,20 +245,74 @@ async fn verify(State(ctx): State<AppContext>, Path(token): Path<String>) -> Res
         <html>
         <head>
             <meta charset="UTF-8">
-            <title>Email Doğrulandı</title>
+            <title>Email Verified</title>
             <style>
-                body { font-family: monospace; background: #0a0c0f; color: #e8edf5; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-                .box { text-align: center; padding: 48px; border: 1px solid #1e2530; border-radius: 8px; background: #111418; max-width: 400px; }
-                h1 { color: #00d4a8; font-size: 24px; margin-bottom: 12px; }
-                p { color: #5a6a7e; margin-bottom: 24px; }
-                a { display: inline-block; padding: 10px 24px; background: #00d4a8; color: #000; text-decoration: none; border-radius: 4px; font-weight: 700; }
+                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Mono:wght@400;500;600&display=swap');
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { 
+                    font-family: 'DM Mono', monospace; 
+                    background: #F4F6FA; 
+                    color: #0A0A0A; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center; 
+                    min-height: 100vh; 
+                }
+                .container {
+                    text-align: center;
+                    padding: 40px 24px;
+                    max-width: 480px;
+                    width: 100%;
+                }
+                .box {
+                    background: #fff;
+                    border: 1px solid rgba(47,82,133,0.08);
+                    border-radius: 20px;
+                    padding: 60px 40px;
+                    box-shadow: 0 4px 24px rgba(47,82,133,0.06);
+                }
+                .icon {
+                    font-size: 48px;
+                    margin-bottom: 20px;
+                }
+                h1 {
+                    font-family: 'Playfair Display', serif;
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: #16a34a;
+                    margin-bottom: 12px;
+                }
+                p {
+                    color: #7A6B72;
+                    font-size: 13px;
+                    line-height: 1.7;
+                    margin-bottom: 28px;
+                }
+                a {
+                    display: inline-block;
+                    padding: 12px 28px;
+                    background: rgba(108, 168, 24, 0.5);
+                    border: 1px solid rgba(227, 253, 208, 0.5);
+                    border-radius: 10px;
+                    color: #ffffff;
+                    text-decoration: none;
+                    font-size: 13px;
+                    font-weight: 600;
+                    transition: all 0.2s;
+                }
+                a:hover {
+                    background: rgba(108, 168, 24, 0.4);
+                }
             </style>
         </head>
         <body>
-            <div class="box">
-                <h1>✓ Email Doğrulandı</h1>
-                <p>Hesabınız başarıyla doğrulandı. Şimdi giriş yapabilirsiniz.</p>
-                <a href="http://localhost:3000/login">Giriş Yap</a>
+            <div class="container">
+                <div class="box">
+                    <div class="icon">✓</div>
+                    <h1>Email Verified</h1>
+                    <p>Your account is verified. You can now sign in and start using Upis Delta.</p>
+                    <a href="http://localhost:3000/login">Continue to Login</a>
+                </div>
             </div>
         </body>
         </html>
@@ -203,23 +368,21 @@ async fn login(State(ctx): State<AppContext>, Json(params): Json<LoginParams>) -
 
     let valid = user.verify_password(&params.password);
 
-    if !valid {
-        return unauthorized("unauthorized!");
-    }
-
-    if !valid {
-        return unauthorized("unauthorized!");
-    }
+    
 
     if user.email_verified_at.is_none() {
         return unauthorized("Please verify your email address before signing in.");
+    }
+
+    if !valid {
+        return unauthorized("olmadi");
     }
 
     let jwt_secret = ctx.config.get_jwt_config()?;
 
     let token = user
         .generate_jwt(&jwt_secret.secret, jwt_secret.expiration)
-        .or_else(|_| unauthorized("unauthorized!"))?;
+        .or_else(|_| unauthorized("olmadi"))?;
 
     format::json(LoginResponse::new(&user, &token))
 }
@@ -259,7 +422,7 @@ async fn magic_link_verify(
     State(ctx): State<AppContext>,
 ) -> Result<Response> {
     let Ok(user) = users::Model::find_by_magic_token(&ctx.db, &token).await else {
-        return unauthorized("unauthorized!");
+        return unauthorized("olmadi");
     };
 
     let user = user.into_active_model().clear_magic_link(&ctx.db).await?;
@@ -268,7 +431,7 @@ async fn magic_link_verify(
 
     let token = user
         .generate_jwt(&jwt_secret.secret, jwt_secret.expiration)
-        .or_else(|_| unauthorized("unauthorized!"))?;
+        .or_else(|_| unauthorized("olmadi"))?;
 
     format::json(LoginResponse::new(&user, &token))
 }

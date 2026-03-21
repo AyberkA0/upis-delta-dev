@@ -7,7 +7,10 @@ pub struct LoginResponse {
     pub token: String,
     pub pid: String,
     pub name: String,
+    pub email: String,
     pub is_verified: bool,
+    pub permission_level: i32,
+    pub plan_code: i32,
 }
 
 impl LoginResponse {
@@ -17,7 +20,10 @@ impl LoginResponse {
             token: token.to_string(),
             pid: user.pid.to_string(),
             name: user.name.clone(),
+            email: user.email.clone(),
             is_verified: user.email_verified_at.is_some(),
+            permission_level: user.permission_level,
+            plan_code: user.plan_code,
         }
     }
 }
@@ -27,6 +33,8 @@ pub struct CurrentResponse {
     pub pid: String,
     pub name: String,
     pub email: String,
+    pub permission_level: i32,
+    pub plan_code: i32,
 }
 
 impl CurrentResponse {
@@ -36,6 +44,8 @@ impl CurrentResponse {
             pid: user.pid.to_string(),
             name: user.name.clone(),
             email: user.email.clone(),
+            permission_level: user.permission_level,
+            plan_code: user.plan_code,
         }
     }
 }

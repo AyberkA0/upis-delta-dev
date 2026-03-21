@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { data, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { authApi } from '../../api/auth'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
@@ -23,14 +23,14 @@ export default function Login() {
     try {
       const { data } = await authApi.login(email, password)
       localStorage.setItem('token', data.token)
-      localStorage.setItem('user', JSON.stringify({ name: data.name, pid: data.pid }))
+      localStorage.setItem('user', JSON.stringify({ name: data.name, pid: data.pid, permission_level: data.permission_level, is_verified: data.is_verified, email: data.email, plan_code: data.plan_code }))
       navigate('/dashboard')
     } catch (err: unknown) {
       const serverMsg =
         (err as { response?: { data?: { error?: string } } })
           ?.response?.data?.error ?? ''
 
-      const message = serverMsg.toLowerCase().includes('unauthorized')
+      const message = serverMsg.toLowerCase().includes('verify')
         ? 'Please verify your email address before signing in.'
         : serverMsg || t('auth.login.error')
 
