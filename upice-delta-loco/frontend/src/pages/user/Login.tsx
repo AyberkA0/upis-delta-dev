@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { data, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { authApi } from '../../api/auth'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
@@ -14,27 +14,55 @@ export default function Login() {
   const [error, setError]       = useState('')
   const [loading, setLoading]   = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [showResendOption, setShowResendOption] = useState(false)
+  const [resendLoading, setResendLoading] = useState(false)
+
+  const handleResendVerification = async () => {
+    if (!email.trim()) return
+    setResendLoading(true)
+    try {
+      await authApi.resendVerificationEmail(email)
+      setError('Verification email sent! Check your inbox.')
+      setShowResendOption(false)
+    } catch {
+      setError('Failed to resend verification email.')
+    } finally {
+      setResendLoading(false)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
+    setShowResendOption(false)
     setLoading(true)
 
     try {
       const { data } = await authApi.login(email, password)
       localStorage.setItem('token', data.token)
-      localStorage.setItem('user', JSON.stringify({ name: data.name, pid: data.pid, permission_level: data.permission_level, is_verified: data.is_verified, email: data.email, plan_code: data.plan_code }))
+      localStorage.setItem('user', JSON.stringify({
+        name: data.name,
+        pid: data.pid,
+        permission_level: data.permission_level,
+        is_verified: data.is_verified,
+        email: data.email,
+        plan_code: data.plan_code,
+      }))
       navigate('/dashboard')
     } catch (err: unknown) {
       const serverMsg =
         (err as { response?: { data?: { error?: string } } })
           ?.response?.data?.error ?? ''
 
-      const message = serverMsg.toLowerCase().includes('verify')
+      const isVerifyError = serverMsg.toLowerCase().includes('verify')
+      const message = isVerifyError
         ? 'Please verify your email address before signing in.'
         : serverMsg || t('auth.login.error')
 
       setError(message)
+      if (isVerifyError) {
+        setShowResendOption(true)
+      }
     } finally {
       setLoading(false)
     }
@@ -119,6 +147,27 @@ export default function Login() {
                 marginBottom: 20,
               }}>
                 {error}
+                {showResendOption && (
+                  <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid rgba(239,68,68,0.2)' }}>
+                    <button
+                      type="button"
+                      onClick={handleResendVerification}
+                      disabled={resendLoading}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: '#2F5285',
+                        cursor: resendLoading ? 'not-allowed' : 'pointer',
+                        textDecoration: 'underline',
+                        fontSize: 12,
+                        fontWeight: 600,
+                        opacity: resendLoading ? 0.6 : 1,
+                      }}
+                    >
+                      {resendLoading ? 'Sending...' : 'Resend verification email'}
+                    </button>
+                  </div>
+                )}
               </div>
             )}
 

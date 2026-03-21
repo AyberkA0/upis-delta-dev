@@ -18,7 +18,10 @@
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td>
-                    <span>Delta | upisdelta.com</span>
+                    <a href="https://upisdelta.com" style="display: inline-flex; align-items: center; gap: 0; background: #0f0f0f; color: #fff; font-family: monospace; font-size: 13px; font-weight: 500; padding: 6px 0; border-radius: 5px; text-decoration: none; overflow: hidden; border: 1px solid #2a2a2a;">
+                      <span style="padding: 0 10px; border-right: 1px solid #2a2a2a; font-weight: 700;">Delta</span>
+                      <span style="padding: 0 10px; color: #888; font-size: 12px; font-weight: 400;">upisdelta.com</span>
+                    </a>
                   </td>
                   <td align="right">
                     <span style="font-size:10px;color:rgba(168,189,208,0.8);letter-spacing:0.15em;text-transform:uppercase;">Data · AI · Execution</span>

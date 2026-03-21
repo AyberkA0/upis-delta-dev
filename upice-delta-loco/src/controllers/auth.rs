@@ -165,7 +165,7 @@ async fn verify(State(ctx): State<AppContext>, Path(token): Path<String>) -> Res
                 <style>
                     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Mono:wght@400;500;600&display=swap');
                     * { margin: 0; padding: 0; box-sizing: border-box; }
-                    body { 
+                    body {
                         font-family: 'DM Mono', monospace; 
                         background: #F4F6FA; 
                         color: #0A0A0A; 
@@ -363,26 +363,33 @@ async fn login(State(ctx): State<AppContext>, Json(params): Json<LoginParams>) -
             email = params.email,
             "login attempt with non-existent email"
         );
-        return unauthorized("Invalid credentials!");
+        return Ok((
+            axum::http::StatusCode::UNAUTHORIZED,
+            axum::Json(serde_json::json!({"error": "Invalid email or password."})),
+        ).into_response());
     };
 
     let valid = user.verify_password(&params.password);
 
-    
-
-    if user.email_verified_at.is_none() {
-        return unauthorized("Please verify your email address before signing in.");
+    if !valid {
+        return Ok((
+            axum::http::StatusCode::UNAUTHORIZED,
+            axum::Json(serde_json::json!({"error": "Invalid email or password."})),
+        ).into_response());
     }
 
-    if !valid {
-        return unauthorized("olmadi");
+    if user.email_verified_at.is_none() {
+        return Ok((
+            axum::http::StatusCode::UNAUTHORIZED,
+            axum::Json(serde_json::json!({"error": "Please verify your email address before signing in."})),
+        ).into_response());
     }
 
     let jwt_secret = ctx.config.get_jwt_config()?;
 
     let token = user
         .generate_jwt(&jwt_secret.secret, jwt_secret.expiration)
-        .or_else(|_| unauthorized("olmadi"))?;
+        .or_else(|_| unauthorized("jwt error"))?;
 
     format::json(LoginResponse::new(&user, &token))
 }
