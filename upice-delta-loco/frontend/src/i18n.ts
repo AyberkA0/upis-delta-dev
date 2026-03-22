@@ -2,8 +2,8 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
-import trCommon from './locales/tr/common.json'
 import enCommon from './locales/en/common.json'
+import trCommon from './locales/tr/common.json'
 import ruCommon from './locales/ru/common.json'
 import zhCommon from './locales/zh/common.json'
 import jaCommon from './locales/ja/common.json'
@@ -18,8 +18,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources: {
-      tr: { common: trCommon },
       en: { common: enCommon },
+      tr: { common: trCommon },
       ru: { common: ruCommon },
       zh: { common: zhCommon },
       ja: { common: jaCommon },

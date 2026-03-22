@@ -1,92 +1,37 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import { useBreakpoint } from '../../hooks/useBreakpoint'
 
-const faqs = [
-  {
-    q: 'What is Upis Delta?',
-    a: 'Upis Delta is a data-driven trading platform that provides real-time market and news data, an AI-powered condition engine, and automated order execution. You define your conditions in plain language, and the system sends trade orders to your connected broker when those conditions are met.',
-  },
-  {
-    q: 'Is this a trading bot?',
-    a: 'Not exactly. Upis Delta is a conditional order execution platform. It does not make autonomous trading decisions — you define the conditions, and the system executes only when your specified criteria are satisfied.',
-  },
-  {
-    q: 'How do I get started?',
-    a: 'Create an account, verify your email, connect your broker API key from account settings, define your conditions using the AI condition engine, and activate your strategy. The platform handles the rest.',
-  },
-  {
-    q: 'What happens if my conditions are met while I\'m offline?',
-    a: 'The platform operates server-side, so your conditions are monitored continuously regardless of whether you are logged in. Orders are sent to your broker automatically when conditions are triggered.',
-  },
-  {
-    q: 'Can I run multiple strategies at the same time?',
-    a: 'Yes. You can define and activate multiple strategies simultaneously across different symbols, timeframes, and condition sets.',
-  },
-  {
-    q: 'What happens if the platform goes down during an active condition?',
-    a: 'We maintain a highly available infrastructure and continuously monitor platform health. While we do not want to sound overconfident, we do not anticipate such an issue occurring. In the event of an outage, active conditions will continue to run safely on our backup servers.',
-  },
-  {
-    q: 'Are my trading strategies private?',
-    a: 'Yes. Your strategies are private and visible only to you. We do not share, sell, or replicate your strategy configurations.',
-  },
-  {
-    q: 'Do you provide financial advice?',
-    a: 'No. Upis Delta provides data and execution tools only. Nothing on this platform constitutes financial advice. All trading decisions are made at your own risk.',
-  },
-  {
-    q: 'What data sources do you support?',
-    a: 'We provide real-time price data for cryptocurrencies, equities, indices, and commodities. News and sentiment data from major financial news sources is also available as a condition trigger.',
-  },
-  {
-    q: 'Which brokers and exchanges are supported?',
-    a: 'Currently, Binance is fully supported. OKX, Interactive Brokers, and DenizBank integrations are in progress. We are continuously expanding our list of supported platforms.',
-  },
-  {
-    q: 'What email addresses are accepted for registration?',
-    a: 'We accept Gmail, Outlook, Hotmail, and Proton email addresses. Alias emails (containing + or similar modifications) are not accepted. This policy helps us maintain platform integrity.',
-  },
-  {
-    q: 'How do I report a bug or security issue?',
-    a: 'Please contact us through official platform channels or our Discord server. For security vulnerabilities, do not disclose them publicly — report them privately so we can address them promptly.',
-  },
-  {
-    q: 'What is the difference between the free and paid plans?',
-    a: 'The platform is currently free during its early access phase. Paid plans with expanded data access, higher execution limits, and premium features will be introduced at a later stage.',
-  },
-  {
-    q: 'What indicators and conditions are supported?',
-    a: 'You can define conditions based on price levels, percentage changes, technical indicators (RSI, MACD, moving averages), volume thresholds, and news sentiment. The AI condition engine interprets your instructions in natural language.',
-  },
-  {
-    q: 'How does the AI condition engine work?',
-    a: 'You describe your trading condition in plain language — for example, "send a buy order if BTC drops below $80,000 and news sentiment is negative." The AI interprets your intent and maps it to executable logic monitored against live data.',
-  },
-  {
-    q: 'Is there a mobile app?',
-    a: 'Not yet. Upis Delta is currently available as a web platform optimized for both desktop and mobile browsers. A dedicated mobile application is on our roadmap.',
-  },
-  {
-    q: 'Can I backtest my strategies?',
-    a: 'Backtesting is on our roadmap and will be available in a future release. It will allow you to simulate your conditions against historical data before going live.',
-  },
-  {
-    q: 'Is my API key safe?',
-    a: 'We encrypt all stored API keys and strongly recommend using trade-only keys — never keys with deposit or withdrawal permissions. You are solely responsible for configuring appropriate API key restrictions. See our Security Policy for full details.',
-  },
-  {
-    q: 'How do I delete my account?',
-    a: 'You can request account deletion from your account settings. All personal data will be deleted or anonymized within 30 days of the request, in accordance with our Privacy Policy.',
-  },
-]
-
 export default function FAQs() {
   const navigate = useNavigate()
   const { isMobile } = useBreakpoint()
+  const { t } = useTranslation()
   const [open, setOpen] = useState<number | null>(null)
+
+  const faqs = [
+    { q: t('faqs.q_0'), a: t('faqs.a_0') },
+    { q: t('faqs.q_1'), a: t('faqs.a_1') },
+    { q: t('faqs.q_2'), a: t('faqs.a_2') },
+    { q: t('faqs.q_3'), a: t('faqs.a_3') },
+    { q: t('faqs.q_4'), a: t('faqs.a_4') },
+    { q: t('faqs.q_5'), a: t('faqs.a_5') },
+    { q: t('faqs.q_6'), a: t('faqs.a_6') },
+    { q: t('faqs.q_7'), a: t('faqs.a_7') },
+    { q: t('faqs.q_8'), a: t('faqs.a_8') },
+    { q: t('faqs.q_9'), a: t('faqs.a_9') },
+    { q: t('faqs.q_10'), a: t('faqs.a_10') },
+    { q: t('faqs.q_11'), a: t('faqs.a_11') },
+    { q: t('faqs.q_12'), a: t('faqs.a_12') },
+    { q: t('faqs.q_13'), a: t('faqs.a_13') },
+    { q: t('faqs.q_14'), a: t('faqs.a_14') },
+    { q: t('faqs.q_15'), a: t('faqs.a_15') },
+    { q: t('faqs.q_16'), a: t('faqs.a_16') },
+    { q: t('faqs.q_17'), a: t('faqs.a_17') },
+    { q: t('faqs.q_18'), a: t('faqs.a_18') },
+  ]
 
   const token = localStorage.getItem('token')
   const user = JSON.parse(localStorage.getItem('user') || '{}')
@@ -161,10 +106,10 @@ export default function FAQs() {
             onMouseEnter={e => e.currentTarget.style.color = '#2F5285'}
             onMouseLeave={e => e.currentTarget.style.color = '#7A6B72'}
           >
-            Home
+            {t('breadcrumb.home')}
           </span>
           <span style={{ color: '#A8BDD0' }}>›</span>
-          <span style={{ color: '#0A0A0A' }}>FAQs</span>
+          <span style={{ color: '#0A0A0A' }}>{t('nav.faqs')}</span>
         </div>
 
         <div style={{
@@ -179,7 +124,7 @@ export default function FAQs() {
             fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase',
             color: '#7A6B72', marginBottom: 12,
           }}>
-            Support
+            {t('faqs.badge')}
           </div>
           <h1 style={{
             fontFamily: "'Playfair Display', serif",
@@ -187,16 +132,16 @@ export default function FAQs() {
             fontWeight: 700, color: '#0A0A0A',
             letterSpacing: -0.5, marginBottom: 16,
           }}>
-            Frequently Asked Questions
+            {t('faqs.title')}
           </h1>
           <p style={{
             fontSize: 13, color: '#7A6B72', lineHeight: 1.7,
             fontFamily: "'DM Mono', monospace", margin: 0,
           }}>
-            Everything you need to know about Upis Delta. Can't find your answer?{' '}
+            {t('faqs.subtitle')}{' '}
             <a href="https://discord.gg/CEYY3GFx7C" target="_blank" rel="noreferrer"
               style={{ color: '#2F5285', textDecoration: 'underline' }}>
-              Ask us on Discord.
+              {t('faqs.ask_discord')}
             </a>
           </p>
         </div>
@@ -259,10 +204,10 @@ export default function FAQs() {
               fontSize: 14, fontWeight: 600, color: '#0A0A0A',
               fontFamily: "'DM Mono', monospace", marginBottom: 4,
             }}>
-              Still have questions?
+              {t('faqs.still_questions')}
             </div>
             <div style={{ fontSize: 12, color: '#7A6B72', fontFamily: "'DM Mono', monospace" }}>
-              Join our community or reach out directly.
+              {t('faqs.community_reach')}
             </div>
           </div>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -289,7 +234,7 @@ export default function FAQs() {
                 e.currentTarget.style.borderColor = 'rgba(47,82,133,0.15)'
               }}
             >
-              Discord →
+              {t('common.discord')}
             </a>
             <a
               href="https://github.com/AyberkA0/upis-delta-dev"
@@ -314,7 +259,7 @@ export default function FAQs() {
                 e.currentTarget.style.borderColor = 'rgba(47,82,133,0.15)'
               }}
             >
-              GitHub →
+              {t('common.github')}
             </a>
           </div>
         </div>

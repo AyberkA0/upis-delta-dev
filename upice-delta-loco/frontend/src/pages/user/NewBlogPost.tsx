@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import RichEditor from '../../components/RichEditor'
@@ -8,6 +9,7 @@ import { blogApi } from '../../api/blog'
 
 export default function NewBlogPost() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { isMobile } = useBreakpoint()
 
   const token = localStorage.getItem('token')
@@ -51,15 +53,15 @@ export default function NewBlogPost() {
     setError('')
 
     if (!title.trim()) {
-      setError('Title is required')
+      setError(t('blog.title_required'))
       return
     }
     if (!content.trim()) {
-      setError('Content is required')
+      setError(t('blog.content_required'))
       return
     }
     if (!slug.trim()) {
-      setError('Slug is required')
+      setError(t('blog.slug_required'))
       return
     }
 
@@ -75,7 +77,7 @@ export default function NewBlogPost() {
     } catch (err: unknown) {
       const message =
         (err as { response?: { data?: { error?: string } } })
-          ?.response?.data?.error ?? 'Failed to create post.'
+          ?.response?.data?.error ?? t('blog.create_failed')
       setError(message)
       setLoading(false)
     }
@@ -101,10 +103,10 @@ export default function NewBlogPost() {
                 fontFamily: "'Playfair Display', serif",
                 fontSize: 24, fontWeight: 700, color: '#0A0A0A', marginBottom: 8,
             }}>
-                Access Denied
+                {t('blog.access_denied')}
             </div>
             <div style={{ fontSize: 13, color: '#7A6B72' }}>
-                You do not have permission to create blog posts.
+                {t('blog.no_permission')}
             </div>
             <br/><br/><br/><br/><br/><br/><br/><br/>
         </div>
@@ -149,11 +151,11 @@ export default function NewBlogPost() {
           display: 'flex', alignItems: 'center', gap: 8,
           fontSize: 12, color: '#7A6B72', marginBottom: 40,
         }}>
-          <span onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>Home</span>
+          <span onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>{t('breadcrumb.home')}</span>
           <span style={{ color: '#A8BDD0' }}>›</span>
-          <span onClick={() => navigate('/blog')} style={{ cursor: 'pointer' }}>Blog</span>
+          <span onClick={() => navigate('/blog')} style={{ cursor: 'pointer' }}>{t('breadcrumb.blog')}</span>
           <span style={{ color: '#A8BDD0' }}>›</span>
-          <span style={{ color: '#0A0A0A' }}>New Post</span>
+          <span style={{ color: '#0A0A0A' }}>{t('breadcrumb.new_post')}</span>
         </div>
 
         <div style={{
@@ -168,7 +170,7 @@ export default function NewBlogPost() {
             fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase',
             color: '#7A6B72', marginBottom: 12,
           }}>
-            Blog
+            {t('breadcrumb.blog')}
           </div>
           <h1 style={{
             fontFamily: "'Playfair Display', serif",
@@ -176,7 +178,7 @@ export default function NewBlogPost() {
             fontWeight: 700, color: '#0A0A0A',
             letterSpacing: -0.5, margin: 0,
           }}>
-            New Post
+            {t('blog.new_post_header')}
           </h1>
         </div>
 
@@ -206,12 +208,12 @@ export default function NewBlogPost() {
                 display: 'block', fontSize: 11, letterSpacing: '0.08em',
                 textTransform: 'uppercase', color: '#7A6B72', marginBottom: 6,
               }}>
-                Title
+                {t('blog.title_label')}
               </label>
               <input
                 className="np-input"
                 type="text"
-                placeholder="Post title"
+                placeholder={t('blog.title_placeholder')}
                 value={title}
                 onChange={e => handleTitleChange(e.target.value)}
                 required
@@ -224,18 +226,18 @@ export default function NewBlogPost() {
                 display: 'block', fontSize: 11, letterSpacing: '0.08em',
                 textTransform: 'uppercase', color: '#7A6B72', marginBottom: 6,
               }}>
-                Slug
+                {t('blog.slug_label')}
               </label>
               <input
                 className="np-input"
                 type="text"
-                placeholder="post-url-slug"
+                placeholder={t('blog.slug_placeholder')}
                 value={slug}
                 onChange={e => handleSlugChange(e.target.value)}
                 required
               />
               <div style={{ fontSize: 11, color: '#A8BDD0', marginTop: 4 }}>
-                URL: /blog/{slug || 'post-slug'}
+                {t('blog.slug_preview', { slug: slug || 'post-slug' })}
               </div>
             </div>
 
@@ -244,7 +246,7 @@ export default function NewBlogPost() {
                 display: 'block', fontSize: 11, letterSpacing: '0.08em',
                 textTransform: 'uppercase', color: '#7A6B72', marginBottom: 6,
               }}>
-                Content
+                {t('blog.content_label')}
               </label>
               <RichEditor content={content} onChange={setContent} />
             </div>
@@ -270,7 +272,7 @@ export default function NewBlogPost() {
                   cursor: loading ? 'not-allowed' : 'pointer',
                 }}
               >
-                {loading ? 'Saving...' : 'Publish Post'}
+                {loading ? t('blog.saving') : t('blog.publish')}
               </button>
 
               <div
@@ -286,7 +288,7 @@ export default function NewBlogPost() {
                   cursor: 'pointer',
                 }}
               >
-                Cancel
+                {t('common.cancel')}
               </div>
             </div>
 

@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import RichEditor from '../../components/RichEditor'
@@ -39,6 +40,7 @@ function injectIds(html: string): string {
 
 export default function BlogPost() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { slug } = useParams<{ slug: string }>()
   const { isMobile } = useBreakpoint()
   const contentRef = useRef<HTMLDivElement>(null)
@@ -62,14 +64,14 @@ export default function BlogPost() {
   }
 
   const handleDelete = async () => {
-    if (!post || !confirm(`Delete "${post.title}"? This cannot be undone.`)) return
+    if (!post || !confirm(t('blog.delete_confirm', { title: post.title }))) return
     setDeleting(true)
 
     try {
       await blogApi.delete(post.id)
       navigate('/blog')
     } catch {
-      alert('Failed to delete post.')
+      alert(t('blog.delete_failed'))
       setDeleting(false)
     }
   }
@@ -85,7 +87,7 @@ export default function BlogPost() {
           setHeadings(extractHeadings(r.data.content))
         }
       })
-      .catch(() => setError('Post error.'))
+      .catch(() => setError(t('blog.post_error')))
       .finally(() => setLoading(false))
   }, [slug])
 
@@ -147,12 +149,12 @@ export default function BlogPost() {
           <span onClick={() => navigate('/')} style={{ cursor: 'pointer' }}
             onMouseEnter={e => e.currentTarget.style.color = '#2F5285'}
             onMouseLeave={e => e.currentTarget.style.color = '#7A6B72'}
-          >Home</span>
+          >{t('breadcrumb.home')}</span>
           <span style={{ color: '#A8BDD0' }}>›</span>
           <span onClick={() => navigate('/blog')} style={{ cursor: 'pointer' }}
             onMouseEnter={e => e.currentTarget.style.color = '#2F5285'}
             onMouseLeave={e => e.currentTarget.style.color = '#7A6B72'}
-          >Blog</span>
+          >{t('breadcrumb.blog')}</span>
           <span style={{ color: '#A8BDD0' }}>›</span>
           <span style={{ color: '#0A0A0A' }}>{post?.title || '...'}</span>
         </div>
@@ -165,7 +167,7 @@ export default function BlogPost() {
               animation: 'spin 0.6s linear infinite',
               margin: '0 auto 16px',
             }} />
-            Loading...
+            {t('common.loading')}
           </div>
         ) : error ? (
           <div style={{
@@ -232,7 +234,7 @@ export default function BlogPost() {
                       e.currentTarget.style.borderColor = 'rgba(239,68,68,0.15)'
                     }}
                   >
-                    {deleting ? 'Deleting...' : '🗑 Delete Post'}
+                    {deleting ? t('blog.deleting') : t('blog.delete_post')}
                   </div>
                 )}
               </div>
@@ -275,7 +277,7 @@ export default function BlogPost() {
                     e.currentTarget.style.borderColor = 'rgba(47,82,133,0.12)'
                   }}
                 >
-                  ← Back to Blog
+                  {t('blog.back_to_blog')}
                 </div>
               </div>
             </article>
@@ -295,7 +297,7 @@ export default function BlogPost() {
                   color: '#A8BDD0', fontWeight: 600, padding: '0 20px',
                   marginBottom: 12,
                 }}>
-                  On this page
+                  {t('blog.on_this_page')}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   {headings.map(h => (

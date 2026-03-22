@@ -11,8 +11,10 @@ import Register from './pages/user/Register'
 import ForgotPassword from './pages/user/ForgotPassword'
 import ResetPassword from './pages/user/ResetPassword'
 import Dashboard from './pages/user/Dashboard' // TO DO
+import DashboardWelcome from './pages/user/DashboardWelcome' // TO DO
+import DashboardStrategy from './pages/user/DashboardStrategy' // TO DO
 import Settings from './pages/user/Settings' // TO DO
-import Help from './pages/user/Help' // TO DO
+import Help from './pages/user/Help' // MISSING CONTENT
 import NewBlogPost from './pages/user/NewBlogPost'
 
 import Terms from './pages/legal/Terms'
@@ -22,10 +24,10 @@ import Security from './pages/legal/Security'
 
 import Landing from './pages/general/Landing'
 import FAQs from './pages/general/FAQs'
-import Roadmap from './pages/general/Roadmap' // TO DO
-import Blog from './pages/general/Blog' // TO DO
+import Roadmap from './pages/general/Roadmap' // MISSING CONTENT
+import Blog from './pages/general/Blog'
 import BlogPost from './pages/general/BlogPost'
-import Overview from './pages/general/Overview' // TO DO
+import Overview from './pages/general/Overview' // MISSING CONTENT
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem('token')
@@ -42,10 +44,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/" element={<Landing />} />
-        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/help" element={<Help />} />
         <Route path="/blog/new" element={<NewBlogPost />} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
+          <Route index element={<DashboardWelcome />} />
+          <Route path="strategy/:strategyId" element={<DashboardStrategy />} />
+        </Route>
 
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />

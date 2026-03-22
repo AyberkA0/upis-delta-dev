@@ -22,10 +22,10 @@ export default function Login() {
     setResendLoading(true)
     try {
       await authApi.resendVerificationEmail(email)
-      setError('Verification email sent! Check your inbox.')
+      setError(t('auth.login.verification_sent'))
       setShowResendOption(false)
     } catch {
-      setError('Failed to resend verification email.')
+      setError(t('auth.login.resend_failed'))
     } finally {
       setResendLoading(false)
     }
@@ -56,7 +56,7 @@ export default function Login() {
 
       const isVerifyError = serverMsg.toLowerCase().includes('verify')
       const message = isVerifyError
-        ? 'Please verify your email address before signing in.'
+        ? t('auth.login.verify_email')
         : serverMsg || t('auth.login.error')
 
       setError(message)
@@ -164,7 +164,7 @@ export default function Login() {
                         opacity: resendLoading ? 0.6 : 1,
                       }}
                     >
-                      {resendLoading ? 'Sending...' : 'Resend verification email'}
+                      {resendLoading ? t('auth.login.resend_sending') : t('auth.login.resend_verification')}
                     </button>
                   </div>
                 )}
@@ -201,7 +201,7 @@ export default function Login() {
                   onClick={() => navigate('/forgot-password')}
                   style={{ fontSize: 11, color: '#2F5285', cursor: 'pointer', textDecoration: 'underline' }}
                 >
-                  Forgot password?
+                  {t('auth.login.forgot_password')}
                 </span>
               </div>
               <div style={{ position: 'relative' }}>

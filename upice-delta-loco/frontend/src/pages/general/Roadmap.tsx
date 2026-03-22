@@ -1,72 +1,74 @@
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import { useBreakpoint } from '../../hooks/useBreakpoint'
 
-const phases = [
-  {
-    phase: 'Phase 1',
-    title: 'Foundation',
-    status: 'completed',
-    period: 'Q1 2026',
-    items: [
-      { text: 'User authentication & email verification', done: true },
-      { text: 'Platform architecture & infrastructure', done: true },
-      { text: 'Landing page & legal pages', done: true },
-      { text: 'Binance integration', done: true },
-      { text: 'Real-time price feed', done: true },
-    ],
-  },
-  {
-    phase: 'Phase 2',
-    title: 'Core Platform',
-    status: 'active',
-    period: 'Q2 2026',
-    items: [
-      { text: 'AI condition engine (natural language input)', done: false },
-      { text: 'Strategy builder & management', done: false },
-      { text: 'Automated order execution', done: false },
-      { text: 'News & sentiment data feed', done: false },
-      { text: 'Dashboard & portfolio overview', done: false },
-    ],
-  },
-  {
-    phase: 'Phase 3',
-    title: 'Expansion',
-    status: 'upcoming',
-    period: 'Q3 2026',
-    items: [
-      { text: 'OKX integration', done: false },
-      { text: 'Interactive Brokers integration', done: false },
-      { text: 'Backtesting engine', done: false },
-      { text: 'Strategy performance analytics', done: false },
-      { text: 'Mobile-optimized experience', done: false },
-    ],
-  },
-  {
-    phase: 'Phase 4',
-    title: 'Scale',
-    status: 'upcoming',
-    period: 'Q4 2026',
-    items: [
-      { text: 'Paid plan tiers', done: false },
-      { text: 'DenizBank integration', done: false },
-      { text: 'Multi-strategy portfolio management', done: false },
-      { text: 'Advanced risk management tools', done: false },
-      { text: 'Mobile application', done: false },
-    ],
-  },
-]
-
-const statusConfig = {
-  completed: { label: 'Completed', color: '#16a34a', bg: 'rgba(22,163,74,0.08)', border: 'rgba(22,163,74,0.2)' },
-  active:    { label: 'In Progress', color: '#2F5285', bg: 'rgba(47,82,133,0.08)', border: 'rgba(47,82,133,0.2)' },
-  upcoming:  { label: 'Upcoming', color: '#7A6B72', bg: 'rgba(122,107,114,0.08)', border: 'rgba(122,107,114,0.2)' },
-}
-
 export default function Roadmap() {
   const navigate = useNavigate()
   const { isMobile } = useBreakpoint()
+  const { t } = useTranslation()
+
+  const statusConfig = {
+    completed: { label: t('roadmap.status_completed'), color: '#16a34a', bg: 'rgba(22,163,74,0.08)', border: 'rgba(22,163,74,0.2)' },
+    active:    { label: t('roadmap.status_active'), color: '#2F5285', bg: 'rgba(47,82,133,0.08)', border: 'rgba(47,82,133,0.2)' },
+    upcoming:  { label: t('roadmap.status_upcoming'), color: '#7A6B72', bg: 'rgba(122,107,114,0.08)', border: 'rgba(122,107,114,0.2)' },
+  }
+
+  const phases = [
+    {
+      phase: 'Phase 1',
+      title: t('roadmap.phase1_title'),
+      status: 'completed',
+      period: t('roadmap.phase1_period'),
+      items: [
+        { text: t('roadmap.phase1_0'), done: true },
+        { text: t('roadmap.phase1_1'), done: true },
+        { text: t('roadmap.phase1_2'), done: true },
+        { text: t('roadmap.phase1_3'), done: true },
+        { text: t('roadmap.phase1_4'), done: true },
+      ],
+    },
+    {
+      phase: 'Phase 2',
+      title: t('roadmap.phase2_title'),
+      status: 'active',
+      period: t('roadmap.phase2_period'),
+      items: [
+        { text: t('roadmap.phase2_0'), done: false },
+        { text: t('roadmap.phase2_1'), done: false },
+        { text: t('roadmap.phase2_2'), done: false },
+        { text: t('roadmap.phase2_3'), done: false },
+        { text: t('roadmap.phase2_4'), done: false },
+      ],
+    },
+    {
+      phase: 'Phase 3',
+      title: t('roadmap.phase3_title'),
+      status: 'upcoming',
+      period: t('roadmap.phase3_period'),
+      items: [
+        { text: t('roadmap.phase3_0'), done: false },
+        { text: t('roadmap.phase3_1'), done: false },
+        { text: t('roadmap.phase3_2'), done: false },
+        { text: t('roadmap.phase3_3'), done: false },
+        { text: t('roadmap.phase3_4'), done: false },
+      ],
+    },
+    {
+      phase: 'Phase 4',
+      title: t('roadmap.phase4_title'),
+      status: 'upcoming',
+      period: t('roadmap.phase4_period'),
+      items: [
+        { text: t('roadmap.phase4_0'), done: false },
+        { text: t('roadmap.phase4_1'), done: false },
+        { text: t('roadmap.phase4_2'), done: false },
+        { text: t('roadmap.phase4_3'), done: false },
+        { text: t('roadmap.phase4_4'), done: false },
+      ],
+    },
+  ]
 
   const token = localStorage.getItem('token')
   const user = JSON.parse(localStorage.getItem('user') || '{}')
@@ -105,10 +107,10 @@ export default function Roadmap() {
             onMouseEnter={e => e.currentTarget.style.color = '#2F5285'}
             onMouseLeave={e => e.currentTarget.style.color = '#7A6B72'}
           >
-            Home
+            {t('breadcrumb.home')}
           </span>
           <span style={{ color: '#A8BDD0' }}>›</span>
-          <span style={{ color: '#0A0A0A' }}>Roadmap</span>
+          <span style={{ color: '#0A0A0A' }}>{t('roadmap.title')}</span>
         </div>
 
         {/* Header */}
@@ -124,7 +126,7 @@ export default function Roadmap() {
             fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase',
             color: '#7A6B72', marginBottom: 12,
           }}>
-            Product
+            {t('roadmap.badge')}
           </div>
           <h1 style={{
             fontFamily: "'Playfair Display', serif",
@@ -132,13 +134,13 @@ export default function Roadmap() {
             fontWeight: 700, color: '#0A0A0A',
             letterSpacing: -0.5, marginBottom: 16,
           }}>
-            Roadmap
+            {t('roadmap.title')}
           </h1>
           <p style={{
             fontSize: 13, color: '#7A6B72',
             lineHeight: 1.7, fontFamily: "'DM Mono', monospace", margin: 0,
           }}>
-            Our development plan for Upis Delta. This roadmap reflects our current priorities and is subject to change based on user feedback and market conditions.
+            {t('roadmap.subtitle')}
           </p>
 
           {/* Status legend */}
@@ -298,7 +300,7 @@ export default function Roadmap() {
             fontFamily: "'DM Mono', monospace",
             lineHeight: 1.7, margin: 0,
           }}>
-            Have a feature request? Share it on{' '}
+            {t('roadmap.feature_request')}{' '}
             <a
               href="https://discord.gg/CEYY3GFx7C"
               target="_blank" rel="noreferrer"
@@ -306,15 +308,15 @@ export default function Roadmap() {
             >
               Discord
             </a>
-            {' '}or open an issue on{' '}
+            {' '}{t('roadmap.or_issue')}{' '}
             <a
               href="https://github.com/AyberkA0/upis-delta-dev"
               target="_blank" rel="noreferrer"
               style={{ color: '#2F5285', textDecoration: 'underline' }}
             >
               GitHub
-            </a>.
-            We review all feedback.
+            </a>
+            {' '}{t('roadmap.review_feedback')}
           </p>
         </div>
 

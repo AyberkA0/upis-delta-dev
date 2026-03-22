@@ -23,7 +23,7 @@ export default function ForgotPassword() {
       await authApi.forgotPassword(email)
       setSuccess(true)
     } catch {
-      setError('Something went wrong. Please try again.')
+      setError(t('auth.forgot.error'))
     } finally {
       setLoading(false)
     }
@@ -48,11 +48,11 @@ export default function ForgotPassword() {
             fontFamily: "'Playfair Display', serif",
             fontSize: 22, fontWeight: 700, color: '#0A0A0A', marginBottom: 12,
           }}>
-            Check your inbox
+            {t('auth.forgot.success_title')}
           </h2>
           <p style={{ color: '#7A6B72', fontSize: 13, lineHeight: 1.8, marginBottom: 28 }}>
-            If an account exists for <strong style={{ color: '#0A0A0A' }}>{email}</strong>, 
-            a password reset link has been sent. Check your spam folder if you don't see it.
+            {t('auth.forgot.success_desc_prefix')} <strong style={{ color: '#0A0A0A' }}>{email}</strong>,
+            {t('auth.forgot.success_desc')}
           </p>
           <div
             onClick={() => navigate('/login')}
@@ -69,7 +69,7 @@ export default function ForgotPassword() {
             onMouseEnter={e => e.currentTarget.style.background = 'rgba(100,112,146,0.3)'}
             onMouseLeave={e => e.currentTarget.style.background = 'rgba(100,112,146,0.5)'}
           >
-            Back to Sign In
+            {t('auth.forgot.back_to_login')}
           </div>
         </div>
       </div>
@@ -138,10 +138,10 @@ export default function ForgotPassword() {
               fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase',
               color: '#7A6B72', marginBottom: 8,
             }}>
-              Password Recovery
+              {t('auth.forgot.title')}
             </div>
             <p style={{ margin: 0, fontSize: 13, color: '#A8BDD0', lineHeight: 1.6 }}>
-              Enter your email and we'll send you a reset link.
+              {t('auth.forgot.subtitle')}
             </p>
           </div>
 
@@ -164,7 +164,7 @@ export default function ForgotPassword() {
                 display: 'block', fontSize: 11, letterSpacing: '0.08em',
                 textTransform: 'uppercase', color: '#7A6B72', marginBottom: 6,
               }}>
-                Email Address
+                {t('auth.forgot.email_label')}
               </label>
               <input
                 className="fp-input"
@@ -202,18 +202,18 @@ export default function ForgotPassword() {
                     borderTopColor: '#e0ebe8', borderRadius: '50%',
                     animation: 'spin 0.6s linear infinite',
                   }} />
-                  Sending...
+                  {t('auth.forgot.loading')}
                 </>
-              ) : 'Send Reset Link'}
+              ) : t('auth.forgot.button')}
             </div>
 
             <div style={{ textAlign: 'center', marginTop: 20, fontSize: 12, color: '#7A6B72' }}>
-              Remember your password?{' '}
+              {t('auth.forgot.remember_password')}{' '}
               <span
                 onClick={() => navigate('/login')}
                 style={{ color: '#2F5285', cursor: 'pointer', textDecoration: 'underline' }}
               >
-                Sign In
+                {t('auth.forgot.sign_in')}
               </span>
             </div>
           </form>

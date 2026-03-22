@@ -30,6 +30,13 @@ export default function LandingPage() {
     document.head.appendChild(link)
   }, [])
 
+  const [disclaimerAccepted, setDisclaimerAccepted] = useState(() => sessionStorage.getItem('disclaimer_accepted') === '1')
+
+  const handleAcceptDisclaimer = () => {
+    sessionStorage.setItem('disclaimer_accepted', '1')
+    setDisclaimerAccepted(true)
+  }
+
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -41,6 +48,73 @@ export default function LandingPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#FAFAFA', fontFamily: "'DM Mono', monospace" }}>
+
+      {!disclaimerAccepted && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 9999,
+          background: 'rgba(10,10,10,0.6)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          padding: 20,
+        }}>
+          <div style={{
+            background: '#fff',
+            border: '1px solid rgba(47,82,133,0.12)',
+            borderRadius: 16,
+            padding: isMobile ? '28px 24px' : '36px 40px',
+            maxWidth: 520, width: '100%',
+            boxShadow: '0 24px 80px rgba(10,10,10,0.25)',
+            textAlign: 'center',
+          }}>
+            <div style={{
+              width: 48, height: 48, borderRadius: '50%',
+              background: 'rgba(245,158,11,0.12)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              margin: '0 auto 20px',
+              fontSize: 24,
+            }}>
+              ⚠
+            </div>
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: isMobile ? 20 : 24,
+              fontWeight: 700, color: '#0A0A0A',
+              marginBottom: 16,
+            }}>
+              Early Access Disclaimer
+            </h2>
+            <p style={{
+              fontSize: 14, lineHeight: 1.7,
+              color: '#555', marginBottom: 28,
+              fontFamily: "'DM Mono', monospace",
+            }}>
+              This platform is not yet fully operational. Any accounts, strategies, API keys, and all other data you create may be deleted, modified, or reset at any time without prior notice. Use at your own risk.
+            </p>
+            <div
+              onClick={handleAcceptDisclaimer}
+              style={{
+                display: 'inline-block',
+                background: '#2F5285',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 30,
+                padding: '12px 36px',
+                fontSize: 14,
+                fontWeight: 600,
+                fontFamily: "'DM Mono', monospace",
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#1a3554' }}
+              onMouseLeave={e => { e.currentTarget.style.background = '#2F5285' }}
+            >
+              I Understand
+            </div>
+          </div>
+        </div>
+      )}
+
       <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -235,10 +309,10 @@ export default function LandingPage() {
 
           <div className="platform-grid">
             {[
-              { name: 'Binance',              ready: true,  color: '#F0B90B', bg: 'rgba(240,185,11,0.08)',  border: 'rgba(240,185,11,0.2)' },
-              { name: 'OKX',                  ready: false, color: '#0A0A0A', bg: 'rgba(10,10,10,0.05)',    border: 'rgba(10,10,10,0.12)' },
-              { name: 'Interactive Brokers',  ready: false, color: '#E31837', bg: 'rgba(227,24,55,0.06)',   border: 'rgba(227,24,55,0.15)' },
-              { name: 'DenizBank',            ready: false, color: '#004F9F', bg: 'rgba(0,79,159,0.06)',    border: 'rgba(0,79,159,0.15)' },
+              { name: 'Binance', ready: true,  color: '#F0B90B', bg: 'rgba(240,185,11,0.08)',  border: 'rgba(240,185,11,0.2)' },
+              { name: 'OKX',     ready: true,  color: '#0A0A0A', bg: 'rgba(10,10,10,0.05)',    border: 'rgba(10,10,10,0.12)' },
+              { name: 'IBKR',    ready: false, color: '#E31837', bg: 'rgba(227,24,55,0.06)',   border: 'rgba(227,24,55,0.15)' },
+              { name: 'Alpaca',  ready: false, color: '#fffb00', bg: 'rgba(0,79,159,0.06)',    border: 'rgba(159, 141, 0, 0.15)' },
             ].map(platform => (
               <div key={platform.name} style={{
                 display: 'flex', alignItems: 'center', gap: 10,

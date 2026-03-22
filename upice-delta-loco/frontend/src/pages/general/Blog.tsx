@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import RichEditor from '../../components/RichEditor'
@@ -29,6 +30,7 @@ function excerpt(html: string, maxLength = 200): string {
 export default function Blog() {
   const navigate = useNavigate()
   const { isMobile } = useBreakpoint()
+  const { t } = useTranslation()
 
   const token = localStorage.getItem('token')
   const user = JSON.parse(localStorage.getItem('user') || '{}')
@@ -47,7 +49,7 @@ export default function Blog() {
   useEffect(() => {
     blogApi.list()
       .then(r => setPosts(r.data))
-      .catch(() => setError('Failed to load posts.'))
+      .catch(() => setError(t('blog.error_load')))
       .finally(() => setLoading(false))
   }, [])
 
@@ -92,9 +94,9 @@ export default function Blog() {
           <span onClick={() => navigate('/')} style={{ cursor: 'pointer' }}
             onMouseEnter={e => e.currentTarget.style.color = '#2F5285'}
             onMouseLeave={e => e.currentTarget.style.color = '#7A6B72'}
-          >Home</span>
+          >{t('breadcrumb.home')}</span>
           <span style={{ color: '#A8BDD0' }}>›</span>
-          <span style={{ color: '#0A0A0A' }}>Blog</span>
+          <span style={{ color: '#0A0A0A' }}>{t('blog.title')}</span>
         </div>
 
         <div style={{
@@ -123,7 +125,7 @@ export default function Blog() {
               fontWeight: 700, color: '#0A0A0A',
               letterSpacing: -0.5, margin: 0,
             }}>
-              Blog
+              {t('blog.title')}
             </h1>
           </div>
           {user.permission_level >= 1 && (
@@ -148,7 +150,7 @@ export default function Blog() {
                 e.currentTarget.style.borderColor = 'rgba(47,82,133,0.15)'
               }}
             >
-              + New Post
+              {t('blog.new_post')}
             </div>
           )}
         </div>
@@ -162,7 +164,7 @@ export default function Blog() {
               margin: '0 auto 16px',
             }} />
             <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-            Loading...
+            {t('blog.loading')}
           </div>
         ) : error ? (
           <div style={{
@@ -182,10 +184,10 @@ export default function Blog() {
               fontFamily: "'Playfair Display', serif",
               fontSize: 20, fontWeight: 700, color: '#0A0A0A', marginBottom: 8,
             }}>
-              No posts yet
+              {t('blog.no_posts')}
             </div>
             <div style={{ fontSize: 13, color: '#7A6B72' }}>
-              Check back soon.
+              {t('blog.check_back')}
             </div>
           </div>
         ) : (
@@ -219,7 +221,7 @@ export default function Blog() {
                   marginTop: 16, fontSize: 12, color: '#2F5285',
                   fontWeight: 600,
                 }}>
-                  Read more →
+                  {t('blog.read_more')}
                 </div>
               </div>
             ))}

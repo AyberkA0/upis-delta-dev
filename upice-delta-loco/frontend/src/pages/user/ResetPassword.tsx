@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { authApi } from '../../api/auth'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
 import logoSvg from '../../assets/upisdelta.svg'
 
 export default function ResetPassword() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token') || ''
 
@@ -27,18 +29,18 @@ export default function ResetPassword() {
     e.preventDefault()
     setError('')
 
-    if (password.length < 8) { setError('Password must be at least 8 characters'); return }
-    if (!/[A-Z]/.test(password)) { setError('Password must contain at least one uppercase letter'); return }
-    if (!/[0-9]/.test(password)) { setError('Password must contain at least one number'); return }
-    if (!/[^a-zA-Z0-9]/.test(password)) { setError('Password must contain at least one special character'); return }
-    if (password !== confirmPassword) { setError('Passwords do not match'); return }
+    if (password.length < 8) { setError(t('auth.register.password_req_length')); return }
+    if (!/[A-Z]/.test(password)) { setError(t('auth.register.password_req_uppercase')); return }
+    if (!/[0-9]/.test(password)) { setError(t('auth.register.password_req_number')); return }
+    if (!/[^a-zA-Z0-9]/.test(password)) { setError(t('auth.register.password_req_symbol')); return }
+    if (password !== confirmPassword) { setError(t('auth.reset.passwords_not_match')); return }
 
     setLoading(true)
     try {
       await authApi.resetPassword(token, password)
       setSuccess(true)
     } catch {
-      setError('This reset link is invalid or has expired. Please request a new one.')
+      setError(t('auth.reset.error'))
     } finally {
       setLoading(false)
     }
@@ -58,10 +60,10 @@ export default function ResetPassword() {
   )
 
   const strengthChecks = [
-    { label: 'At least 8 characters', ok: password.length >= 8 },
-    { label: 'One uppercase letter',  ok: /[A-Z]/.test(password) },
-    { label: 'One number',            ok: /[0-9]/.test(password) },
-    { label: 'One special character', ok: /[^a-zA-Z0-9]/.test(password) },
+    { label: t('auth.register.password_req_length'), ok: password.length >= 8 },
+    { label: t('auth.register.password_req_uppercase'),  ok: /[A-Z]/.test(password) },
+    { label: t('auth.register.password_req_number'),            ok: /[0-9]/.test(password) },
+    { label: t('auth.register.password_req_symbol'), ok: /[^a-zA-Z0-9]/.test(password) },
   ]
 
   if (success) {
@@ -89,11 +91,10 @@ export default function ResetPassword() {
             // fontFamily: "'Playfair Display', serif",
             fontSize: 22, fontWeight: 700, color: '#0A0A0A', marginBottom: 12,
           }}>
-            Password updated
+            {t('auth.reset.success_title')}
           </h2>
           <p style={{ color: '#7A6B72', fontSize: 13, lineHeight: 1.8, marginBottom: 28 }}>
-            Your password has been successfully reset. 
-            You can now sign in with your new password.
+            {t('auth.reset.success_desc')}
           </p>
           <div
             onClick={() => navigate('/login')}
@@ -110,7 +111,7 @@ export default function ResetPassword() {
             onMouseEnter={e => e.currentTarget.style.background = 'rgba(100,112,146,0.3)'}
             onMouseLeave={e => e.currentTarget.style.background = 'rgba(100,112,146,0.5)'}
           >
-            Sign In →
+            {t('auth.reset.sign_in')}
           </div>
         </div>
       </div>
@@ -177,10 +178,10 @@ export default function ResetPassword() {
               fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase',
               color: '#7A6B72', marginBottom: 8,
             }}>
-              Password Reset
+              {t('auth.reset.title')}
             </div>
             <p style={{ margin: 0, fontSize: 13, color: '#A8BDD0', lineHeight: 1.6 }}>
-              Choose a new password for your account.
+              {t('auth.reset.subtitle')}
             </p>
           </div>
 
@@ -202,13 +203,13 @@ export default function ResetPassword() {
                 display: 'block', fontSize: 11, letterSpacing: '0.08em',
                 textTransform: 'uppercase', color: '#7A6B72', marginBottom: 6,
               }}>
-                New Password
+                {t('auth.reset.new_password')}
               </label>
               <div style={{ position: 'relative' }}>
                 <input
                   className="rp-input"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Min. 8 characters"
+                  placeholder={t('auth.reset.password_placeholder')}
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   required
@@ -255,13 +256,13 @@ export default function ResetPassword() {
                 display: 'block', fontSize: 11, letterSpacing: '0.08em',
                 textTransform: 'uppercase', color: '#7A6B72', marginBottom: 6,
               }}>
-                Confirm Password
+                {t('auth.reset.confirm_password')}
               </label>
               <div style={{ position: 'relative' }}>
                 <input
                   className={`rp-input ${confirmPassword && password !== confirmPassword ? 'border-color:rgba(239,68,68,0.5)' : ''}`}
                   type={showConfirm ? 'text' : 'password'}
-                  placeholder="Repeat your password"
+                  placeholder={t('auth.reset.confirm_password_placeholder')}
                   value={confirmPassword}
                   onChange={e => setConfirmPassword(e.target.value)}
                   required
@@ -286,7 +287,7 @@ export default function ResetPassword() {
               </div>
               {confirmPassword && password !== confirmPassword && (
                 <div style={{ fontSize: 11, color: '#dc2626', marginTop: 4 }}>
-                  Passwords do not match
+                  {t('auth.reset.passwords_not_match')}
                 </div>
               )}
             </div>
@@ -315,9 +316,9 @@ export default function ResetPassword() {
                     borderTopColor: '#e0ebe8', borderRadius: '50%',
                     animation: 'spin 0.6s linear infinite',
                   }} />
-                  Updating...
+                  {t('auth.reset.loading')}
                 </>
-              ) : 'Set New Password'}
+              ) : t('auth.reset.button')}
             </div>
 
           </form>

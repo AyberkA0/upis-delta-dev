@@ -13,13 +13,11 @@ const ALLOWED_DOMAINS = [
 function validateEmail(email: string): string | null {
   const lower = email.toLowerCase()
   const parts = lower.split('@')
-  if (parts.length !== 2) return 'Invalid email address'
+  if (parts.length !== 2) return 'invalid_email'
   const [local, domain] = parts
-  if (!local || !domain) return 'Invalid email address'
-  if (local.includes('+') || local.includes('.')) return 'Alias emails (with + or .) are not accepted'
-  if (!ALLOWED_DOMAINS.includes(domain)) {
-    return `Only these domains are accepted: ${ALLOWED_DOMAINS.join(', ')}`
-  }
+  if (!local || !domain) return 'invalid_email'
+  if (local.includes('+') || local.includes('.')) return 'alias_email_error'
+  if (!ALLOWED_DOMAINS.includes(domain)) return 'domain_error'
   return null
 }
 
@@ -41,11 +39,17 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
+  const resolveEmailError = (key: string | null): string => {
+    if (!key) return ''
+    if (key === 'domain_error') return t('auth.register.domain_error', { domains: ALLOWED_DOMAINS.join(', ') })
+    return t(`auth.register.${key}`)
+  }
+
   const handleEmailChange = (val: string) => {
     setEmail(val)
     if (val.includes('@')) {
-      const err = validateEmail(val)
-      setEmailError(err || '')
+      const key = validateEmail(val)
+      setEmailError(resolveEmailError(key))
     } else {
       setEmailError('')
     }
@@ -55,12 +59,15 @@ export default function Register() {
     e.preventDefault()
     setError('')
 
-    const emailErr = validateEmail(email)
-    if (emailErr) { setError(emailErr); return }
-    if (password !== confirmPassword) { setError('Passwords do not match'); return }
-    if (password.length < 8) { setError('Password must be at least 8 characters'); return }
+    const emailErrKey = validateEmail(email)
+    if (emailErrKey) { setError(resolveEmailError(emailErrKey)); return }
+    if (password !== confirmPassword) { setError(t('auth.register.passwords_not_match')); return }
+    if (password.length < 8) { setError(t('auth.register.password_req_length')); return }
+    if (!/[A-Z]/.test(password)) { setError(t('auth.register.password_req_uppercase')); return }
+    if (!/[0-9]/.test(password)) { setError(t('auth.register.password_req_number')); return }
+    if (!/[^a-zA-Z0-9]/.test(password)) { setError(t('auth.register.password_req_symbol')); return }
     if (!agreeTerms || !agreePrivacy || !agreeAge) {
-      setError('Please accept all required agreements')
+      setError(t('auth.register.accept_agreements'))
       return
     }
 
@@ -291,7 +298,7 @@ export default function Register() {
                 <input
                   className="reg-input"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Min. 8 characters"
+                  placeholder={t('auth.register.password_placeholder')}
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   required
@@ -324,6 +331,20 @@ export default function Register() {
                   )}
                 </div>
               </div>
+              {password.length > 0 && (
+                <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  {[
+                    { ok: password.length >= 8, label: t('auth.register.password_req_length') },
+                    { ok: /[A-Z]/.test(password), label: t('auth.register.password_req_uppercase') },
+                    { ok: /[0-9]/.test(password), label: t('auth.register.password_req_number') },
+                    { ok: /[^a-zA-Z0-9]/.test(password), label: t('auth.register.password_req_symbol') },
+                  ].map((r, i) => (
+                    <div key={i} style={{ fontSize: 11, color: r.ok ? '#16a34a' : '#dc2626', display: 'flex', alignItems: 'center', gap: 5 }}>
+                      <span style={{ fontSize: 10 }}>{r.ok ? '✓' : '✗'}</span> {r.label}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div style={{ marginBottom: 24 }}>
@@ -331,13 +352,13 @@ export default function Register() {
                 display: 'block', fontSize: 11, letterSpacing: '0.08em',
                 textTransform: 'uppercase', color: '#7A6B72', marginBottom: 6,
               }}>
-                Confirm Password
+                {t('auth.register.confirm_password')}
               </label>
               <div style={{ position: 'relative' }}>
                 <input
                   className={`reg-input ${confirmPassword && password !== confirmPassword ? 'error' : ''}`}
                   type={showConfirmPassword ? 'text' : 'password'}
-                  placeholder="Repeat your password"
+                  placeholder={t('auth.register.confirm_password_placeholder')}
                   value={confirmPassword}
                   onChange={e => setConfirmPassword(e.target.value)}
                   required
@@ -371,7 +392,7 @@ export default function Register() {
               </div>
               {confirmPassword && password !== confirmPassword && (
                 <div style={{ fontSize: 11, color: '#dc2626', marginTop: 4 }}>
-                  Passwords do not match
+                  {t('auth.register.passwords_not_match')}
                 </div>
               )}
             </div>
@@ -385,17 +406,17 @@ export default function Register() {
               {[
                 {
                   key: 'terms', checked: agreeTerms, set: setAgreeTerms,
-                  text: 'I agree to the ',
-                  link: 'Terms of Service', href: '/terms',
+                  text: t('auth.register.agree_terms_prefix'),
+                  link: t('auth.register.terms_of_service'), href: '/terms',
                 },
                 {
                   key: 'privacy', checked: agreePrivacy, set: setAgreePrivacy,
-                  text: 'I have read and accept the ',
-                  link: 'Privacy Policy', href: '/privacy',
+                  text: t('auth.register.agree_privacy_prefix'),
+                  link: t('auth.register.privacy_policy'), href: '/privacy',
                 },
                 {
                   key: 'age', checked: agreeAge, set: setAgreeAge,
-                  text: 'I confirm I am 18 years of age or older',
+                  text: t('auth.register.agree_age'),
                   link: null, href: null,
                 },
               ].map(item => (

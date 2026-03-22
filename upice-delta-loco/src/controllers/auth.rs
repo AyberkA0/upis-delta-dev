@@ -52,12 +52,22 @@ async fn register(
     let user = match res {
         Ok(user) => user,
         Err(err) => {
+            let msg = err.to_string();
             tracing::info!(
-                message = err.to_string(),
+                message = &msg,
                 user_email = &params.email,
                 "registration failed for user",
             );
-            return format::json(());
+            return Ok(
+                axum::response::Response::builder()
+                    .status(axum::http::StatusCode::BAD_REQUEST)
+                    .header("content-type", "application/json")
+                    .body(axum::body::Body::from(
+                        serde_json::json!({ "error": msg }).to_string(),
+                    ))
+                    .unwrap()
+                    .into_response(),
+            );
         }
     };
 
