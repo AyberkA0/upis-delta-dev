@@ -32,7 +32,7 @@ export default function SidebarUserMenu({ user, onLogout }: SidebarUserMenuProps
 
   const links = [
     { label: t('nav.settings'), path: '/settings' },
-    { label: t('nav.api_keys'), path: '/settings' },
+    { label: t('nav.api_keys'), path: '/settings#apikeys' },
     { label: t('nav.help'), path: '/help' },
   ]
 
